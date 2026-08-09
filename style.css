@@ -1,0 +1,959 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #030303;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#room {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+#tv-container {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.77vh;
+  cursor: pointer;
+  transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  transform-origin: 50% 49%;
+}
+
+#bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#tv-screen-behind {
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  width: 60%;
+  height: 60%;
+  z-index: 1;
+  transform: rotate(6deg);
+}
+
+#static-gif {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.zoom-in {
+  transform: scale(10) translateZ(0);
+}
+
+#flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in;
+}
+
+.flash-active {
+  opacity: 1 !important;
+}
+
+#inside-tv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+  background-color: #111;
+}
+
+#inner-static {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  z-index: 1;
+}
+
+.os-window {
+  background-color: rgba(5, 15, 5, 0.85);
+  border: 1px solid #1a3d1a;
+  border-top: 15px solid #0f290f;
+  width: 85%;
+  max-width: 700px;
+  padding: 60px 40px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+.os-header {
+  position: absolute;
+  top: -15px;
+  left: 10px;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px #0f0,
+    0 0 10px #0f0;
+}
+
+.os-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 50px;
+  column-gap: 20px;
+  justify-items: center;
+}
+
+.grid-item.channel-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.grid-item.channel-btn:hover {
+  transform: scale(1.15);
+}
+
+.grid-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  image-rendering: pixelated;
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.5));
+}
+
+.grid-text {
+  font-family: "Courier New", Courier, monospace;
+  color: #0f0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 5px #0f0,
+    0 0 10px #0f0;
+}
+
+#osd-nav {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  z-index: 100;
+  font-family: "Courier New", Courier, monospace;
+  color: #0f0;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow:
+    0 0 5px #0f0,
+    0 0 10px #0f0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#osd-toggle {
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 15px;
+}
+.osd-prompt {
+  animation: slow-blink 2s step-end infinite;
+}
+
+@keyframes slow-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+#osd-dropdown {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border: 2px solid #0f0;
+  padding: 10px;
+  z-index: 9999;
+}
+
+.osd-option {
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.osd-option:hover {
+  opacity: 1;
+  text-shadow:
+    0 0 8px #0f0,
+    0 0 15px #fff;
+}
+
+#programs-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.program {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.active-program {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CH 01: Info */
+.broadcast-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.central-panel {
+  width: 80%;
+  max-width: 800px;
+  background-color: rgba(5, 15, 5, 0.9);
+  border: 4px solid #0f0;
+  padding: 50px 40px;
+  position: relative;
+  box-shadow:
+    inset 0 0 20px rgba(0, 255, 0, 0.2),
+    10px 10px 0px rgba(0, 0, 0, 0.9);
+  margin-bottom: 50px;
+}
+
+.panel-badge {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background-color: #000;
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 5px 15px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+}
+
+.panel-content {
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.info-title {
+  color: #0f0;
+  margin-top: 0;
+  text-shadow: 0 0 8px #0f0;
+}
+
+.news-ticker {
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid #0f0;
+  border-bottom: 2px solid #0f0;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+.ticker-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-scroll 20s linear infinite;
+  text-shadow: 0 0 8px #0f0;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+#typewriter-container {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+#typewriter-text {
+  color: #0f0;
+  white-space: pre-wrap;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.cursor {
+  display: inline-block;
+  color: #0f0;
+  font-weight: bold;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* CH 02: Skills */
+.fighter-select-container {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.fighter-header {
+  color: #0f0;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #0f0;
+  margin-bottom: 30px;
+  animation: blink 2s step-end infinite;
+}
+
+.roster-layout {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 30%;
+  text-align: center;
+  align-content: start;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.roster-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.roster-grid::-webkit-scrollbar-track {
+  background: #000;
+  border: 1px solid #0f0;
+}
+.roster-grid::-webkit-scrollbar-thumb {
+  background: #0f0;
+}
+
+.roster-title {
+  grid-column: span 2;
+  color: #0f0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid #0f0;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.fighter-btn {
+  background: transparent;
+  color: #0f0;
+  border: 2px solid #0f0;
+  padding: 15px 5px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.fighter-btn:hover {
+  background: #0f0;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #0f0;
+}
+
+.fighter-display {
+  width: 35%;
+  border: 4px double #0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(5, 15, 5, 0.8);
+  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.fighter-logo-container {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #0f0;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+#f-icon {
+  font-size: 85px !important;
+  line-height: 120px !important;
+  color: #0f0 !important;
+  text-shadow: 0 0 4px #0f0 !important;
+  filter: grayscale(100%) sepia(100%) hue-rotate(85deg) saturate(3000%)
+    brightness(1.2) !important;
+  -webkit-font-smoothing: none !important;
+}
+
+#f-name {
+  color: #0f0;
+  font-size: 2rem;
+  margin: 0;
+  text-shadow: 0 0 5px #0f0;
+}
+
+#f-class {
+  color: #0f0;
+  margin: 5px 0 20px 0;
+  opacity: 0.8;
+}
+
+/* Retro Rank Display */
+.stats-container {
+  width: 100%;
+  margin-top: 10px;
+  background: #000;
+  border: 2px solid #0f0;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.rank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.rank-row:last-child {
+  margin-bottom: 0;
+}
+
+.rank-label {
+  color: #0f0;
+  font-size: 1.2rem;
+}
+
+.rank-value {
+  color: #fff;
+  font-size: 1.5rem;
+  text-shadow:
+    0 0 10px #fff,
+    0 0 20px #0f0;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+.exp-value {
+  color: #0f0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #0f0;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 25px #0f0;
+  }
+}
+
+/* CH 03: Projects */
+.flashing-title {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  text-align: center;
+  font-size: 2.5rem;
+  text-shadow:
+    0 0 10px #0f0,
+    0 0 20px #0f0;
+  margin: 0;
+  width: 100%;
+  animation: blink 1s step-end infinite;
+  z-index: 10;
+}
+
+.ps1-container {
+  display: flex;
+  width: 75%;
+  height: 55%;
+  min-height: 400px;
+  max-height: 500px;
+  margin: 130px auto 0;
+  gap: 30px;
+  font-family: "Courier New", Courier, monospace;
+  align-items: flex-start;
+}
+
+.crt-monitor {
+  width: 60%;
+  height: 100%;
+  background: rgba(5, 15, 5, 0.9);
+  border: 4px solid #0f0;
+  padding: 5px;
+  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.tv-screen {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.rm-h1 {
+  color: #0f0;
+  font-size: 1.4rem;
+  border-bottom: 2px dashed #0f0;
+  padding-bottom: 5px;
+  margin: 0 0 10px 0;
+}
+
+#ch-projects .crt-monitor .tv-screen h2.rm-h2 {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  text-shadow: none !important;
+  background-color: #0f0 !important;
+  font-size: 1rem !important;
+  margin: 10px 0 5px 0 !important;
+  display: inline-block !important;
+  padding: 2px 8px !important;
+  font-weight: bold !important;
+  opacity: 1 !important;
+}
+
+.rm-p {
+  color: #0f0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+
+.memory-card {
+  width: 40%;
+  height: 100%;
+  border: 4px solid #0f0;
+  background: rgba(5, 15, 5, 0.9);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.mc-header {
+  color: #0f0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px dashed #0f0;
+  padding-bottom: 10px;
+}
+
+.save-block {
+  border: 2px solid #053305;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-block:hover,
+.save-block.active-save {
+  border-color: #0f0;
+  background: rgba(0, 255, 0, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.save-title {
+  color: #0f0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: block;
+}
+
+.save-date {
+  color: #0f0;
+  opacity: 0.7;
+  font-size: 0.8rem;
+}
+
+/* CH 04: Contact */
+.infomercial-container {
+  width: 75%;
+  max-width: 800px;
+  height: 75%;
+  background-color: rgba(5, 15, 5, 0.85);
+  border: 2px solid #0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.flash-text {
+  color: #0f0;
+  font-size: 2.2rem;
+  margin: 0;
+  text-shadow: 0 0 10px #0f0;
+  letter-spacing: 3px;
+  animation: rapid-flash-green 1s infinite step-end;
+}
+
+.infomercial-pitch {
+  color: #0f0;
+  font-size: 1.4rem;
+  text-shadow: 0 0 5px #0f0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.order-box {
+  background-color: transparent;
+  border: 4px dashed #0f0;
+  padding: 15px 30px;
+  width: 80%;
+}
+
+.order-title {
+  color: #0f0;
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 8px #0f0;
+}
+
+.contact-method {
+  font-size: 1.5rem;
+  color: #0f0;
+  margin: 8px 0;
+  text-shadow: 0 0 5px #0f0;
+  letter-spacing: 2px;
+}
+
+.fine-print {
+  color: #0f0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  max-width: 85%;
+  margin: 0;
+  font-weight: bold;
+}
+
+.timer-box {
+  background-color: #000;
+  color: #0f0;
+  padding: 10px 20px;
+  font-size: 1.8rem;
+  border: 2px solid #0f0;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.contact-link {
+  color: #0f0;
+  text-decoration: none;
+  text-shadow: 0 0 5px #0f0;
+  transition: all 0.2s ease;
+}
+
+.contact-link:hover {
+  background-color: #0f0;
+  color: #000;
+  text-shadow:
+    0 0 10px #fff,
+    0 0 20px #0f0;
+}
+
+@keyframes rapid-flash-green {
+  0%,
+  49% {
+    opacity: 1;
+    color: #0f0;
+  }
+  50%,
+  100% {
+    opacity: 0.2;
+    color: #053305;
+  }
+}
+/* --- HACKER MENU ICONS (PURE CSS) --- */
+
+.hacker-icon {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Adds a baseline glow to all icons */
+  filter: drop-shadow(0 0 5px #0f0);
+}
+
+/* 1. INFO: Radar Sweep */
+.radar-icon {
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+  overflow: hidden;
+}
+
+.radar-icon::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  bottom: 50%;
+  right: 50%;
+  transform-origin: bottom right;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.8));
+  animation: radar-spin 2s linear infinite;
+}
+
+@keyframes radar-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 2. SKILLS: Animated Bar Chart */
+.bars-icon {
+  align-items: flex-end; /* Anchors bars to the bottom */
+  gap: 8px;
+}
+
+.bar {
+  width: 14px;
+  background-color: #0f0;
+  box-shadow: 0 0 5px #0f0;
+  transform-origin: bottom;
+  animation: bar-bounce 1s ease-in-out infinite alternate;
+}
+
+.bar-1 {
+  height: 30%;
+  animation-delay: 0s;
+}
+.bar-2 {
+  height: 80%;
+  animation-delay: 0.2s;
+}
+.bar-3 {
+  height: 50%;
+  animation-delay: 0.4s;
+}
+.bar-4 {
+  height: 100%;
+  animation-delay: 0.6s;
+}
+
+@keyframes bar-bounce {
+  0% {
+    transform: scaleY(0.4);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* 3. PROJECTS: Blinking Data Blocks */
+.blocks-icon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.d-block {
+  background-color: #0f0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 5px #0f0;
+  animation: block-flicker 2s infinite;
+}
+
+.b1 {
+  animation-delay: 0s;
+}
+.b2 {
+  animation-delay: 0.3s;
+}
+.b3 {
+  animation-delay: 0.8s;
+}
+.b4 {
+  animation-delay: 0.5s;
+}
+
+@keyframes block-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* 4. CONTACT: Pulsing Signal Wave */
+.signal-icon {
+  overflow: visible;
+}
+
+.ring {
+  position: absolute;
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  animation: signal-ripple 2s linear infinite;
+  opacity: 0;
+}
+
+.ring-1 {
+  animation-delay: 0s;
+}
+.ring-2 {
+  animation-delay: 0.6s;
+}
+.ring-3 {
+  animation-delay: 1.2s;
+}
+
+@keyframes signal-ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    border-width: 4px;
+  }
+  100% {
+    width: 90px;
+    height: 90px;
+    opacity: 0;
+    border-width: 1px;
+  }
+}

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persona 4 CRT Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+  </head>
+  <body>
+    <div id="room">
+      <div id="tv-container">
+        <div id="tv-screen-behind">
+          <img id="static-gif" src="resources/static.gif" alt="TV Static" />
+          <div class="scanlines"></div>
+        </div>
+        <img
+          id="bg-image"
+          src="resources/tv-bg-transparent.png"
+          alt="TV Stack"
+        />
+      </div>
+    </div>
+
+    <div id="inside-tv">
+      <img id="inner-static" src="resources/static.gif" alt="Inner Static" />
+      <div class="scanlines"></div>
+
+      <div id="osd-nav">
+        <div id="osd-toggle">
+          <span class="osd-prompt">SELECT</span> ▶ [ CH 00 ]
+        </div>
+        <div id="osd-dropdown">
+          <div class="osd-option" data-channel="main-menu">CH 00: MAIN</div>
+          <div class="osd-option" data-channel="info">CH 01: INFO</div>
+          <div class="osd-option" data-channel="skills">CH 02: SKIL</div>
+          <div class="osd-option" data-channel="projects">CH 03: PROJ</div>
+          <div class="osd-option" data-channel="contact">CH 04: CONT</div>
+        </div>
+      </div>
+
+      <div id="programs-container">
+        <!-- CH 00: Main Menu -->
+        <div id="ch-main-menu" class="program active-program">
+          <div class="os-window">
+            <div class="os-header">PORTFOLIO.OS v1.0</div>
+            <div class="os-grid">
+              <!-- INFO: Radar Sweep -->
+              <button class="grid-item channel-btn" data-channel="info">
+                <div class="hacker-icon radar-icon"></div>
+                <span class="grid-text">INFO</span>
+              </button>
+
+              <!-- SKILLS: Animated Bar Chart -->
+              <button class="grid-item channel-btn" data-channel="skills">
+                <div class="hacker-icon bars-icon">
+                  <div class="bar bar-1"></div>
+                  <div class="bar bar-2"></div>
+                  <div class="bar bar-3"></div>
+                  <div class="bar bar-4"></div>
+                </div>
+                <span class="grid-text">SKILLS</span>
+              </button>
+
+              <!-- PROJECTS: Blinking Data Blocks -->
+              <button class="grid-item channel-btn" data-channel="projects">
+                <div class="hacker-icon blocks-icon">
+                  <div class="d-block b1"></div>
+                  <div class="d-block b2"></div>
+                  <div class="d-block b3"></div>
+                  <div class="d-block b4"></div>
+                </div>
+                <span class="grid-text">PROJECTS</span>
+              </button>
+
+              <!-- CONTACT: Pulsing Signal Wave -->
+              <button class="grid-item channel-btn" data-channel="contact">
+                <div class="hacker-icon signal-icon">
+                  <div class="ring ring-1"></div>
+                  <div class="ring ring-2"></div>
+                  <div class="ring ring-3"></div>
+                </div>
+                <span class="grid-text">CONTACT</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CH 01: Info -->
+        <div id="ch-info" class="program">
+          <div class="broadcast-container">
+            <div class="central-panel">
+              <div class="panel-badge">LIVE // BROADCAST</div>
+              <div class="panel-content">
+                <h2 class="info-title">SYSTEM_ALERT: USER_BIO_FRAGMENT</h2>
+                <div id="typewriter-container">
+                  <span id="typewriter-text"></span
+                  ><span class="cursor">_</span>
+                </div>
+              </div>
+            </div>
+            <div class="news-ticker">
+              <div class="ticker-text">
+                +++ BREAKING NEWS: SOFTWARE ENGINEER INITIATES NEW BUILD +++
+                CURRENT STATUS: AWAITING DEPLOYMENT +++
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CH 02: Skills -->
+        <div id="ch-skills" class="program">
+          <div class="fighter-select-container">
+            <h2 class="fighter-header">SELECT YOUR FIGHTER</h2>
+            <div class="roster-layout">
+              <div class="roster-grid">
+                <div class="roster-title">BACKEND</div>
+                <button class="fighter-btn" data-fighter="java">
+                  [ JAVA ]
+                </button>
+                <button class="fighter-btn" data-fighter="python">
+                  [ PYTN ]
+                </button>
+                <button class="fighter-btn" data-fighter="rust">
+                  [ RUST ]
+                </button>
+                <button class="fighter-btn" data-fighter="sql">[ SQL ]</button>
+              </div>
+
+              <div class="fighter-display">
+                <div class="fighter-logo-container">
+                  <i id="f-icon" class="devicon-linux-plain"></i>
+                </div>
+                <h3 id="f-name">HOVER TO SELECT</h3>
+                <p id="f-class">CLASS: ???</p>
+                <div class="stats-container">
+                  <div class="rank-row">
+                    <span class="rank-label">RANK:</span>
+                    <span id="f-rank" class="rank-value">?</span>
+                  </div>
+                  <div class="rank-row">
+                    <span class="rank-label">EXP:</span>
+                    <span id="f-exp" class="exp-value">UNKNOWN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="roster-grid">
+                <div class="roster-title">SYSTEM</div>
+                <button class="fighter-btn" data-fighter="arch">
+                  [ ARCH ]
+                </button>
+                <button class="fighter-btn" data-fighter="docker">
+                  [ DOCK ]
+                </button>
+                <button class="fighter-btn" data-fighter="bash">
+                  [ BASH ]
+                </button>
+                <button class="fighter-btn" data-fighter="git">[ GIT ]</button>
+                <button class="fighter-btn" data-fighter="ssh">[ SSH ]</button>
+                <button class="fighter-btn" data-fighter="nginx">
+                  [ NGNX ]
+                </button>
+                <button class="fighter-btn" data-fighter="pm2">[ PM2 ]</button>
+                <button class="fighter-btn" data-fighter="systemd">
+                  [ SYMD ]
+                </button>
+                <button class="fighter-btn" data-fighter="cicd">
+                  [ CICD ]
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CH 03: Projects -->
+        <div id="ch-projects" class="program">
+          <h2 class="flashing-title">SELECT SAVE DATA</h2>
+          <div class="ps1-container">
+            <div class="crt-monitor">
+              <div class="tv-screen" id="proj-screen">
+                <h2
+                  class="blink-text"
+                  style="color: #0f0; margin-top: 30%; text-align: center"
+                >
+                  > AWAITING MEMORY CARD INPUT...
+                </h2>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <div class="mc-header">MEMORY CARD [SLOT 1]</div>
+              <div class="save-block" data-proj="lsm">
+                <i
+                  class="devicon-c-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">LSM_ENGINE.sav</span>
+                  <span class="save-date">SYS_DATA // C</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="compiler">
+                <i
+                  class="devicon-python-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">COMPILER.sav</span>
+                  <span class="save-date">CORE_BIN // Python</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="bookstore">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">BOOKSTORE.sav</span>
+                  <span class="save-date">ENTERPRISE // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="complex_data">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">COMPLEX_DATA.sav</span>
+                  <span class="save-date">DB_ALGOS // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="ai">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">AI_MODELS.sav</span>
+                  <span class="save-date">SEARCH_TREES // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="comp_intel">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">COMP_INTEL.sav</span>
+                  <span class="save-date">NEURAL_NETS // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="data_structs">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">DATA_STRUCTS.sav</span>
+                  <span class="save-date">CORE_MEM // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="info_retrieval">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">INFO_RETRIEVE.sav</span>
+                  <span class="save-date">LUCENE_IDX // Java</span>
+                </div>
+              </div>
+              <div class="save-block" data-proj="javagames">
+                <i
+                  class="devicon-java-plain"
+                  style="font-size: 30px !important"
+                ></i>
+                <div class="save-info">
+                  <span class="save-title">JAVA_GAMES.sav</span>
+                  <span class="save-date">TERMINAL // Java</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CH 04: Contact -->
+        <div id="ch-contact" class="program">
+          <div class="infomercial-container">
+            <h1 class="flash-text">!!! URGENT BROADCAST !!!</h1>
+            <h2 class="infomercial-pitch">
+              BACKEND ENGINEER REQUIRED?<br />INITIATE SECURE HANDSHAKE.
+            </h2>
+            <div class="order-box">
+              <h3 class="order-title">CONNECTION PROTOCOLS</h3>
+              <p class="contact-method">
+                >
+                <a href="mailto:me@romanoskotsis.com" class="contact-link"
+                  >MAILTO: me@romanoskotsis.com</a
+                >
+              </p>
+              <p class="contact-method">
+                >
+                <a
+                  href="https://github.com/yle-rom"
+                  target="_blank"
+                  class="contact-link"
+                  >GITHUB.COM</a
+                >
+              </p>
+              <p class="contact-method">
+                >
+                <a
+                  href="https://linkedin.com/in/romanos-kotsis"
+                  target="_blank"
+                  class="contact-link"
+                  >LINKEDIN.COM</a
+                >
+              </p>
+            </div>
+            <p class="fine-print">
+              * WARNING: INITIATING CONTACT MAY RESULT IN OPTIMIZED
+              ARCHITECTURE, CLEAN CODEBASES, AND RAPID DEPLOYMENT. PROCEED WITH
+              CAUTION. END OF LINE.
+            </p>
+            <div class="timer-box">
+              CONNECTION TIMEOUT IN:
+              <span class="flash-text" id="contact-timer">5:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <audio id="tv-click-sound" src="resources/click.mp3"></audio>
+    <audio id="static-audio" src="resources/static.mp3" loop></audio>
+    <audio id="zap-sound" src="resources/zapping.mp3"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
