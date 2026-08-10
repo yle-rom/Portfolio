@@ -51,6 +51,42 @@
         </div>
       </div>
 
+      <!-- Bottom OSD: Mute Button & Full-Screen Volume Bar -->
+      <div id="bottom-osd">
+        <button id="mute-btn" aria-label="Toggle Volume">
+          <!-- Inline SVG Speaker Icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="speaker-svg"
+          >
+            <!-- The Speaker Cone -->
+            <polygon
+              points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+              fill="currentColor"
+            ></polygon>
+            <!-- The 3 Sound Waves -->
+            <g class="sound-waves">
+              <path d="M14.5 9.5a3 3 0 0 1 0 5"></path>
+              <path d="M17.5 6.5a7 7 0 0 1 0 11"></path>
+              <path d="M20.5 3.5a11 11 0 0 1 0 17"></path>
+            </g>
+            <!-- The "X" (Hidden by default) -->
+            <g class="mute-cross">
+              <line x1="15" y1="9" x2="21" y2="15"></line>
+              <line x1="21" y1="9" x2="15" y2="15"></line>
+            </g>
+          </svg>
+        </button>
+        <div id="volume-osd">
+          <span id="vol-bars"></span>
+        </div>
+      </div>
       <div id="programs-container">
         <!-- CH 00: Main Menu -->
         <div id="ch-main-menu" class="program active-program">

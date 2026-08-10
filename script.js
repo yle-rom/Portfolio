@@ -21,6 +21,40 @@ document.addEventListener("DOMContentLoaded", () => {
     document.removeEventListener("click", startStatic);
   };
 
+  // --- MUTE & VOLUME LOGIC ---
+  const muteBtn = document.getElementById("mute-btn");
+  const volumeOsd = document.getElementById("volume-osd");
+  const volBars = document.getElementById("vol-bars");
+  let isMuted = false;
+  let volumeTimeout;
+
+  muteBtn.addEventListener("click", () => {
+    isMuted = !isMuted;
+
+    staticAudio.muted = isMuted;
+    clickSound.muted = isMuted;
+    zapSound.muted = isMuted;
+
+    // Massively long strings. CSS will naturally cut them off at the edge of the screen!
+    const barsOn =
+      " |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| ";
+    const barsOff =
+      " -------------------------------------------------------------------------------------------------------------------------- ";
+
+    if (isMuted) {
+      muteBtn.classList.add("is-muted");
+      volBars.innerText = barsOff;
+    } else {
+      muteBtn.classList.remove("is-muted");
+      volBars.innerText = barsOn;
+    }
+
+    volumeOsd.classList.add("volume-visible");
+    clearTimeout(volumeTimeout);
+    volumeTimeout = setTimeout(() => {
+      volumeOsd.classList.remove("volume-visible");
+    }, 2000);
+  });
   staticAudio.play().catch(() => {
     document.addEventListener("mousemove", startStatic);
     document.addEventListener("click", startStatic);

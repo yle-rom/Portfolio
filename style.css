@@ -989,7 +989,86 @@ html {
   animation: blink 1s step-end infinite;
   line-height: 1.5;
 }
+/* --- BOTTOM OSD: MUTE & VOLUME BAR --- */
+/* --- BOTTOM OSD: MUTE & VOLUME BAR --- */
+#bottom-osd {
+  position: absolute;
+  bottom: 25px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spacing between speaker and the volume bar */
+  z-index: 100;
+  pointer-events: none;
+}
 
+#mute-btn {
+  pointer-events: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+#mute-btn:hover {
+  transform: scale(1.1);
+}
+
+/* SVG Speaker Icon Styling */
+.speaker-svg {
+  width: 28px;
+  height: 28px;
+  color: #0f0; /* Sets both the fill and stroke color */
+  filter: drop-shadow(0 0 4px #0f0);
+  transition: all 0.2s;
+}
+
+#mute-btn:hover .speaker-svg {
+  color: #fff;
+  filter: drop-shadow(0 0 8px #fff);
+}
+
+/* Hide the cross by default */
+.mute-cross {
+  display: none;
+}
+
+/* When muted: Hide waves, show cross, dim the glow slightly */
+.is-muted .sound-waves {
+  display: none;
+}
+
+.is-muted .mute-cross {
+  display: block;
+}
+
+.is-muted .speaker-svg {
+  filter: drop-shadow(0 0 2px #0f0);
+  opacity: 0.8;
+}
+
+/* The Full-Screen Volume Bar */
+#volume-osd {
+  flex-grow: 1;
+  min-width: 0; /* CRUCIAL: Prevents the long text from expanding the container off-screen */
+  font-family: "Courier New", Courier, monospace;
+  color: #0f0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px #0f0;
+  white-space: nowrap;
+  overflow: hidden; /* Safely chops off the excess bars at the edge of the screen */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.volume-visible {
+  opacity: 1 !important;
+}
 /* Intercept mobile/tablet portrait orientation.
    Only fires on touch-sized screens in portrait — desktop windows
    resized narrow-but-tall won't normally hit both conditions together
@@ -1011,6 +1090,23 @@ html {
    (phones in landscape are wide but very short, e.g. ~700x350)
    ========================================================= */
 @media screen and (max-height: 500px) and (orientation: landscape) {
+  /* Mobile Bottom OSD */
+  /* Mobile Bottom OSD */
+  #bottom-osd {
+    bottom: 15px;
+    left: max(15px, env(safe-area-inset-left));
+    right: max(15px, env(safe-area-inset-right));
+    gap: 10px;
+  }
+
+  .speaker-svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  #volume-osd {
+    font-size: 1.1rem;
+  }
   /* --- OSD NAV --- */
   #osd-nav {
     top: 10px;
