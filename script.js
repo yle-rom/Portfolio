@@ -139,10 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 > NAME: ROMANOS_KOTSIS 
 > ROLE: BACKEND_SYSTEMS_ENGINEER
 > BASE: IOANNINA_GREECE
-> STATUS: CURRENTLY ACCEPTING NEW MISSIONS
-
-> HIGH PROFICIENCY IN BACKEND & SYSTEMS LOGIC.
-> READY TO DEPLOY...`;
+> STATUS: CURRENTLY DEPLOYED AT KEYVOTO`;
 
   const typewriterElement = document.getElementById("typewriter-text");
   let typeInterval;
