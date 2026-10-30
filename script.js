@@ -15,6 +15,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isZooming = false;
 
+  // Phase-lock all 1s blinks to the page clock so every blinking text flashes together.
+  // A CSS animation restarts whenever its element is shown, so channels opened later drift.
+  const BLINKS = ["blink", "slow-blink", "rapid-flash-green"];
+  const syncBlinks = () => {
+    requestAnimationFrame(() => {
+      document.getAnimations().forEach((a) => {
+        if (
+          BLINKS.includes(a.animationName) &&
+          a.effect.getTiming().duration === 1000
+        ) {
+          a.startTime = 0;
+        }
+      });
+    });
+  };
+  syncBlinks();
+
   // --- MUTE & VOLUME LOGIC ---
   const muteBtn = document.getElementById("mute-btn");
   const volumeOsd = document.getElementById("volume-osd");
@@ -68,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("room").style.display = "none";
         document.getElementById("inside-tv").style.display = "flex";
         document.getElementById("osd-nav").style.display = "flex";
+        syncBlinks();
         flash.classList.remove("flash-active");
         staticAudio.volume = 0.2;
         staticAudio.play().catch(() => {});
@@ -114,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       osdToggle.innerHTML = `<span class="osd-prompt">SELECT</span> ▶ [ ${channelDisplayMap[channelId] || "CH ??"} ]`;
+      syncBlinks();
     }, 300);
   };
 
@@ -337,27 +356,78 @@ document.addEventListener("DOMContentLoaded", () => {
     archive: `<h1 class="rm-h1"># Archive</h1><p class="rm-p">> University projects (M.Eng CS&amp;E, Univ. of Ioannina).</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Multithreaded LSM storage engine (C, pthreads)</p><p class="rm-p">- Compiler for a Python-like language (Python)</p><p class="rm-p">- Social Bookstore (Spring Boot)</p><p class="rm-p">- External sort &amp; R-tree indexing, neural networks from scratch, AI search algorithms, Lucene search engine, data structures, terminal games (Java)</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ BROWSE PROFILE ]</a></p>`,
   };
 
+  // --- PROJECTS: CARTRIDGE CONSOLE LOGIC ---
   const tvScreen = document.getElementById("proj-screen");
+  const crtBezel = document.getElementById("crt-bezel");
+  const consoleSlot = document.getElementById("console-slot");
+  const slotCart = document.getElementById("slot-cart");
+  const consoleLed = document.getElementById("console-led");
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  let loadedCart = null;
+  let isLoading = false;
 
-  const showProject = (e) => {
-    document
-      .querySelectorAll(".save-block")
-      .forEach((b) => b.classList.remove("active-save"));
-    const currentBlock = e.currentTarget;
-    currentBlock.classList.add("active-save");
+  // Fly a copy of the cartridge from the shelf into the console slot
+  const flyToSlot = (cart) =>
+    new Promise((resolve) => {
+      if (reduceMotion) return resolve();
+      const from = cart.getBoundingClientRect();
+      const to = consoleSlot.getBoundingClientRect();
+      const ghost = cart.cloneNode(true);
+      ghost.classList.add("cart-ghost");
+      Object.assign(ghost.style, {
+        left: `${from.left}px`,
+        top: `${from.top}px`,
+        width: `${from.width}px`,
+        height: `${from.height}px`,
+      });
+      document.body.appendChild(ghost);
+      ghost.getBoundingClientRect(); // commit the start position before animating
+      ghost.style.transform = `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${to.width / from.width}, ${to.height / from.height})`;
+      ghost.style.opacity = "0.4";
+      setTimeout(() => {
+        ghost.remove();
+        resolve();
+      }, 450);
+    });
 
-    const projId = currentBlock.getAttribute("data-proj");
-    if (projectData[projId]) {
-      tvScreen.innerHTML = projectData[projId];
+  const loadCartridge = async (cart) => {
+    if (isLoading || cart === loadedCart) return;
+    isLoading = true;
+
+    // Eject the current cartridge back to the shelf
+    if (loadedCart) loadedCart.classList.remove("in-console");
+    consoleSlot.classList.remove("loaded");
+    consoleLed.classList.remove("on");
+
+    const flight = flyToSlot(cart);
+    cart.classList.add("in-console");
+    await flight;
+
+    slotCart.innerText = cart.querySelector(".cart-title").innerText;
+    consoleSlot.classList.add("loaded");
+    loadedCart = cart;
+
+    // Boot: click sound and a static burst, then the README appears
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+    consoleLed.classList.add("busy");
+    crtBezel.classList.add("tuning");
+
+    setTimeout(() => {
+      tvScreen.innerHTML = projectData[cart.getAttribute("data-proj")];
       tvScreen.scrollTop = 0;
-    }
+      crtBezel.classList.remove("tuning");
+      consoleLed.classList.remove("busy");
+      consoleLed.classList.add("on");
+      isLoading = false;
+    }, 400);
   };
 
-  // Hover for mouse, click for touch, focus for keyboard
-  document.querySelectorAll(".save-block").forEach((block) => {
-    ["mouseenter", "click", "focus"].forEach((evt) =>
-      block.addEventListener(evt, showProject),
-    );
+  // Buttons, so click covers mouse, touch and keyboard (Enter/Space)
+  document.querySelectorAll(".cartridge").forEach((cart) => {
+    cart.addEventListener("click", (e) => loadCartridge(e.currentTarget));
   });
 
   // --- AGENT HOW-TO SHOW LOGIC ---

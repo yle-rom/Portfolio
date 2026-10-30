@@ -1,5 +1,17 @@
+/* ShureTechMono Nerd Font (Mono), subset to the characters the site uses (OFL, see resources/fonts/OFL.txt) */
+@font-face {
+  font-family: "ShureTechMono";
+  src: url("resources/fonts/ShureTechMonoNerdFontMono-subset.woff2") format("woff2");
+  font-display: swap;
+}
+
+button {
+  font-family: inherit;
+}
+
 body,
 html {
+  font-family: "ShureTechMono", "Courier New", monospace;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -30,14 +42,14 @@ html {
   background: rgba(0, 0, 0, 0.75);
   border: 2px solid #0f0;
   color: #0f0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 2px;
   text-shadow: 0 0 5px #0f0;
   white-space: nowrap;
   pointer-events: none;
-  animation: blink 1.2s step-end infinite;
+  animation: blink 1s step-end infinite;
 }
 
 #tv-container {
@@ -159,7 +171,7 @@ html {
   top: -15px;
   left: 10px;
   color: #0f0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -200,7 +212,7 @@ html {
 }
 
 .grid-text {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   color: #0f0;
   font-size: 1.2rem;
   font-weight: bold;
@@ -216,7 +228,7 @@ html {
   top: 30px;
   right: 40px;
   z-index: 100;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   color: #0f0;
   font-size: 2rem;
   font-weight: bold;
@@ -234,7 +246,7 @@ html {
   margin-bottom: 15px;
 }
 .osd-prompt {
-  animation: slow-blink 2s step-end infinite;
+  animation: slow-blink 1s step-end infinite;
 }
 
 @keyframes slow-blink {
@@ -327,7 +339,7 @@ html {
   color: #0f0;
   border: 2px solid #0f0;
   padding: 5px 15px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 2px;
@@ -336,7 +348,7 @@ html {
 
 .panel-content {
   color: #0f0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
 }
 
 .info-title {
@@ -351,7 +363,7 @@ html {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.95);
   color: #0f0;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-weight: bold;
   font-size: 1.5rem;
   padding: 10px 0;
@@ -414,7 +426,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
 }
 
 .fighter-header {
@@ -422,7 +434,7 @@ html {
   font-size: 2.5rem;
   text-shadow: 0 0 10px #0f0;
   margin-bottom: 30px;
-  animation: blink 2s step-end infinite;
+  animation: blink 1s step-end infinite;
 }
 
 .roster-layout {
@@ -470,7 +482,7 @@ html {
   color: #0f0;
   border: 2px solid #0f0;
   padding: 15px 5px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
@@ -585,14 +597,14 @@ html {
   }
 }
 
-/* CH 03: Projects */
-/* Title sits in the flow right above the panels, so the pair centers together */
+/* CH 03: Projects (TV + console + cartridge shelf) */
+/* Title sits in the flow right above the stage, so the pair centers together */
 #ch-projects.active-program {
   flex-direction: column;
 }
 
 .flashing-title {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   color: #0f0;
   text-align: center;
   font-size: 2.5rem;
@@ -605,39 +617,192 @@ html {
   z-index: 10;
 }
 
-.ps1-container {
+.console-stage {
   display: flex;
-  width: 75%;
+  width: 80%;
+  max-width: 1300px;
   height: 65%;
-  min-height: 400px;
-  max-height: 620px;
+  min-height: 420px;
+  max-height: 640px;
   margin: 0 auto;
   gap: 30px;
-  font-family: "Courier New", Courier, monospace;
-  align-items: flex-start;
+  font-family: "ShureTechMono", "Courier New", monospace;
+  align-items: stretch;
 }
 
-.crt-monitor {
-  width: 60%;
-  height: 100%;
-  background: rgba(5, 15, 5, 0.9);
+/* --- The TV --- */
+.console-rig {
+  width: 62%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.crt-tv {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #0b120b;
   border: 4px solid #0f0;
-  padding: 5px;
-  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
-  position: relative;
+  border-radius: 18px;
+  padding: 14px 14px 0;
   box-sizing: border-box;
+  box-shadow:
+    inset 0 0 20px rgba(0, 255, 0, 0.15),
+    0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.crt-bezel {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #020602;
+  border: 3px solid #053305;
+  border-radius: 24px / 30px; /* slight CRT curvature */
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 255, 0, 0.15);
 }
 
 .tv-screen {
   width: 100%;
   height: 100%;
-  background: transparent;
-  padding: 20px;
+  padding: 20px 26px;
   overflow-y: auto;
   text-align: left;
   box-sizing: border-box;
 }
 
+.tv-idle {
+  color: #0f0;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 25%;
+  text-shadow: 0 0 8px #0f0;
+  animation: blink 1s step-end infinite;
+}
+
+.tv-static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.crt-bezel.tuning .tv-static {
+  opacity: 0.85;
+}
+
+.crt-chin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  padding: 0 6px;
+  color: #0f0;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  opacity: 0.8;
+}
+
+.crt-knobs {
+  display: flex;
+  gap: 8px;
+}
+
+.crt-knobs span {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #0f0;
+  border-radius: 50%;
+}
+
+/* --- The console (front-loading slot) --- */
+.console {
+  width: 78%;
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
+  background: #0b120b;
+  border: 4px solid #0f0;
+  border-top-width: 2px;
+  border-radius: 0 0 14px 14px;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.console-slot {
+  flex: 1;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border: 2px solid #053305;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.slot-cart {
+  background: #0f0;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 2px 10px;
+  display: none; /* empty slot shows nothing */
+}
+
+/* Slides up into view each time a cartridge is inserted */
+.console-slot.loaded .slot-cart {
+  display: inline-block;
+  animation: slot-insert 0.25s ease-out;
+}
+
+@keyframes slot-insert {
+  from {
+    transform: translateY(150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.console-led {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #053305;
+  border: 1px solid #0f0;
+}
+
+.console-led.on {
+  background: #0f0;
+  box-shadow: 0 0 8px #0f0;
+}
+
+.console-led.busy {
+  animation: blink 0.2s step-end infinite;
+}
+
+.console-name {
+  color: #0f0;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* --- README text on the TV --- */
 .rm-h1 {
   color: #0f0;
   font-size: 1.4rem;
@@ -646,7 +811,7 @@ html {
   margin: 0 0 10px 0;
 }
 
-#ch-projects .crt-monitor .tv-screen h2.rm-h2 {
+#ch-projects .tv-screen h2.rm-h2 {
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   text-shadow: none !important;
@@ -667,21 +832,21 @@ html {
   white-space: pre-wrap;
 }
 
-.memory-card {
-  width: 40%;
-  height: 100%;
-  border: 4px solid #0f0;
-  background: rgba(5, 15, 5, 0.9);
-  padding: 15px;
+/* --- The cartridge shelf --- */
+.cart-shelf {
+  width: 38%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 15px;
+  background: rgba(5, 15, 5, 0.9);
+  border: 4px solid #0f0;
   box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
   overflow-y: auto;
   box-sizing: border-box;
 }
 
-.mc-header {
+.shelf-header {
   color: #0f0;
   font-size: 1.2rem;
   font-weight: bold;
@@ -690,68 +855,130 @@ html {
   padding-bottom: 10px;
 }
 
-.save-block {
-  border: 2px solid #053305;
-  padding: 10px;
+.cartridge {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: stretch;
+  flex-shrink: 0;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  background: #0b120b;
+  color: #0f0;
+  border: 2px solid #0f0;
+  border-radius: 4px 10px 10px 4px;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.2s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    opacity 0.2s;
 }
 
-.save-block i {
-  font-size: 30px;
+/* Ridged grip on the end you hold */
+.cart-grip {
+  width: 16px;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    #0f0 0 2px,
+    transparent 2px 6px
+  );
+  border-right: 2px solid #0f0;
+  opacity: 0.6;
+}
+
+.cart-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 8px;
+  padding: 0 10px;
+  background: rgba(0, 255, 0, 0.12);
+  border: 1px solid #053305;
+}
+
+.cart-label i {
+  font-size: 28px;
   color: #0f0;
 }
 
-/* Visible green scrollbars so overflowing text and slots are discoverable */
+.cart-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cart-title,
+.cart-tag {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-title {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.cart-tag {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Lean toward the console on hover */
+.cartridge:hover {
+  transform: translateX(-8px);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+}
+
+.cartridge.in-console {
+  opacity: 0.3;
+  border-style: dashed;
+}
+
+/* Copy that flies into the slot (defined after .cartridge so its transition wins) */
+.cart-ghost {
+  position: fixed;
+  z-index: 500;
+  margin: 0;
+  font-family: "ShureTechMono", "Courier New", monospace; /* lives on <body>, outside the stage */
+  pointer-events: none;
+  transform-origin: top left;
+  transition:
+    transform 0.45s cubic-bezier(0.5, 0, 0.3, 1),
+    opacity 0.45s;
+}
+
+/* Visible green scrollbars so overflowing text and cartridges are discoverable */
 .tv-screen,
-.memory-card {
+.cart-shelf {
   scrollbar-width: thin;
   scrollbar-color: #0f0 #000;
 }
 
 .tv-screen::-webkit-scrollbar,
-.memory-card::-webkit-scrollbar {
+.cart-shelf::-webkit-scrollbar {
   width: 6px;
 }
 
 .tv-screen::-webkit-scrollbar-track,
-.memory-card::-webkit-scrollbar-track {
+.cart-shelf::-webkit-scrollbar-track {
   background: #000;
 }
 
 .tv-screen::-webkit-scrollbar-thumb,
-.memory-card::-webkit-scrollbar-thumb {
+.cart-shelf::-webkit-scrollbar-thumb {
   background: #0f0;
 }
 
-.save-block:focus-visible,
+.cartridge:focus-visible,
 .fighter-btn:focus-visible,
 .step-btn:focus-visible {
   outline: 2px dashed #fff;
   outline-offset: 2px;
-}
-
-.save-block:hover,
-.save-block.active-save {
-  border-color: #0f0;
-  background: rgba(0, 255, 0, 0.15);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.save-title {
-  color: #0f0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  display: block;
-}
-
-.save-date {
-  color: #0f0;
-  opacity: 0.7;
-  font-size: 0.8rem;
 }
 
 /* CH 04: Agent (How-To Show) */
@@ -762,7 +989,7 @@ html {
   border: 2px solid #0f0;
   padding: 30px;
   position: relative;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   color: #0f0;
   box-sizing: border-box;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
@@ -889,7 +1116,7 @@ html {
   align-items: center;
   padding: 30px;
   text-align: center;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   box-sizing: border-box;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
@@ -900,7 +1127,7 @@ html {
   margin: 0;
   text-shadow: 0 0 10px #0f0;
   letter-spacing: 3px;
-  animation: rapid-flash-green 1s infinite step-end;
+  animation: rapid-flash-green 1s step-end infinite;
 }
 
 .infomercial-pitch {
@@ -1107,7 +1334,7 @@ html {
 .prompt-icon {
   border: 2px solid #0f0;
   box-sizing: border-box;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 2.5rem;
   font-weight: bold;
   color: #0f0;
@@ -1176,7 +1403,7 @@ html {
   text-align: center;
   padding: 30px;
   box-sizing: border-box;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
 }
 
 .orientation-text {
@@ -1252,7 +1479,7 @@ html {
 #volume-osd {
   flex-grow: 1;
   min-width: 0; /* CRUCIAL: Prevents the long text from expanding the container off-screen */
-  font-family: "Courier New", Courier, monospace;
+  font-family: "ShureTechMono", "Courier New", monospace;
   color: #0f0;
   font-size: 1.5rem;
   font-weight: bold;
@@ -1491,7 +1718,7 @@ html {
     font-size: 0.9rem;
   }
 
-  .ps1-container {
+  .console-stage {
     width: 100%;
     height: 78%;
     min-height: 0;
@@ -1503,21 +1730,76 @@ html {
     justify-content: center;
   }
 
-  .crt-monitor {
-    width: 55%; /* Strict width */
-    min-width: 0;
+  .console-rig {
+    width: 58%;
   }
 
-  .memory-card {
-    width: 40%; /* Strict width */
-    min-width: 0;
+  .crt-tv {
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 6px 6px 0;
+  }
+
+  .crt-bezel {
+    border-width: 2px;
+    border-radius: 12px / 16px;
+  }
+
+  .tv-screen {
+    padding: 10px;
+  }
+
+  .tv-idle {
+    font-size: 0.7rem;
+  }
+
+  .crt-chin {
+    height: 16px;
+    font-size: 0.45rem;
+    letter-spacing: 1px;
+  }
+
+  .crt-knobs span {
+    width: 7px;
+    height: 7px;
+    border-width: 1px;
+  }
+
+  .console {
+    height: 32px;
+    gap: 8px;
+    padding: 0 8px;
+    border-width: 2px;
+    border-top-width: 1px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .console-slot {
+    height: 16px;
+    border-width: 1px;
+  }
+
+  .slot-cart {
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    padding: 0 6px;
+  }
+
+  .console-led {
+    width: 7px;
+    height: 7px;
+  }
+
+  .console-name {
+    font-size: 0.45rem;
+    letter-spacing: 1px;
   }
 
   .rm-h1 {
     font-size: 0.85rem;
   }
 
-  #ch-projects .crt-monitor .tv-screen h2.rm-h2 {
+  #ch-projects .tv-screen h2.rm-h2 {
     font-size: 0.75rem !important;
   }
 
@@ -1526,47 +1808,45 @@ html {
     margin-bottom: 6px;
   }
 
-  .tv-screen {
-    padding: 10px;
+  .cart-shelf {
+    width: 40%;
+    padding: 8px;
+    gap: 6px;
+    border-width: 2px;
   }
 
-  .mc-header {
+  .shelf-header {
     font-size: 0.8rem;
     padding-bottom: 6px;
   }
 
-  .save-block {
-    padding: 5px;
-    gap: 8px;
-    min-width: 0; /* Crucial: allows the block to shrink */
+  .cartridge {
+    height: 38px;
   }
 
-  .save-block i {
-    font-size: 18px !important;
+  .cart-grip {
+    width: 8px;
   }
 
-  .save-info {
-    display: flex;
-    flex-direction: column;
-    min-width: 0; /* Crucial: allows the text container to shrink */
-    flex-grow: 1;
-  }
-  .save-title,
-  .save-date {
-    white-space: nowrap; /* Forces text to stay on one line */
-    overflow: hidden; /* Hides the overflowing text */
-    text-overflow: ellipsis; /* Adds "..." to cut-off text */
-    width: 100%;
-  }
-  /* --- CH 04: CONTACT --- */
-
-  .save-title {
-    font-size: 0.75rem;
+  .cart-label {
+    margin: 3px 4px;
+    padding: 0 6px;
+    gap: 6px;
   }
 
-  .save-date {
-    font-size: 0.55rem;
+  .cart-label i {
+    font-size: 16px;
   }
+
+  .cart-title {
+    font-size: 0.7rem;
+  }
+
+  .cart-tag {
+    font-size: 0.5rem;
+  }
+
+  /* --- CH 05: CONTACT --- */
   .infomercial-container {
     width: 94%;
     height: 90%;
@@ -1682,7 +1962,7 @@ html {
     margin-bottom: 5px;
   }
 
-  .ps1-container {
+  .console-stage {
     height: 74%;
     margin-top: 30px;
   }

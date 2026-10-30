@@ -265,107 +265,106 @@
           </div>
         </div>
 
-        <!-- CH 03: Projects -->
+        <!-- CH 03: Projects (TV + console + cartridge shelf) -->
         <div id="ch-projects" class="program">
-          <h2 class="flashing-title">SELECT SAVE DATA</h2>
-          <div class="ps1-container">
-            <div class="crt-monitor">
-              <div class="tv-screen" id="proj-screen">
-                <h2
-                  class="blink-text"
-                  style="color: #0f0; margin-top: 30%; text-align: center"
-                >
-                  > AWAITING MEMORY CARD INPUT...
-                </h2>
+          <h2 class="flashing-title">INSERT CARTRIDGE</h2>
+          <div class="console-stage">
+            <div class="console-rig">
+              <div class="crt-tv">
+                <div class="crt-bezel" id="crt-bezel">
+                  <div class="tv-screen" id="proj-screen">
+                    <p class="tv-idle blink-text">
+                      &gt; NO CARTRIDGE.<br />&gt; INSERT ONE FROM THE SHELF.
+                    </p>
+                  </div>
+                  <img class="tv-static" src="resources/static.gif" alt="" />
+                </div>
+                <div class="crt-chin">
+                  <span class="crt-brand">PORTFOLIO-VISION</span>
+                  <span class="crt-knobs"><span></span><span></span></span>
+                </div>
+              </div>
+              <div class="console">
+                <span class="console-led" id="console-led"></span>
+                <div class="console-slot" id="console-slot">
+                  <span class="slot-cart" id="slot-cart"></span>
+                </div>
+                <span class="console-name">MAGI-STATION</span>
               </div>
             </div>
 
-            <div class="memory-card">
-              <div class="mc-header">MEMORY CARD [SLOT 1]</div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="magi"
-              >
-                <i class="devicon-nodejs-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">MAGI_AI.sav</span>
-                  <span class="save-date">LOCAL_LLM // Node.js</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="magips"
-              >
-                <i class="devicon-c-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">MAGIPS.sav</span>
-                  <span class="save-date">PROC_MGR // C</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="magicc"
-              >
-                <i class="devicon-python-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">MAGICC.sav</span>
-                  <span class="save-date">DOCKER_CLEAN // Python</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="waygo"
-              >
-                <i class="devicon-java-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">WAYGO.sav</span>
-                  <span class="save-date">THESIS // Java</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="dotfiles"
-              >
-                <i class="devicon-archlinux-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">DOTFILES.sav</span>
-                  <span class="save-date">HYPRLAND // Arch</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="bash_scripts"
-              >
-                <i class="devicon-bash-plain"></i>
-                <div class="save-info">
-                  <span class="save-title">BASH_SCRIPTS.sav</span>
-                  <span class="save-date">DESKTOP // Bash</span>
-                </div>
-              </div>
-              <div
-                class="save-block"
-                tabindex="0"
-                role="button"
-                data-proj="archive"
-              >
-                <i class="devicon-github-original"></i>
-                <div class="save-info">
-                  <span class="save-title">ARCHIVE.sav</span>
-                  <span class="save-date">UNI_PROJECTS // Mixed</span>
-                </div>
-              </div>
+            <div class="cart-shelf">
+              <div class="shelf-header">CARTRIDGE SHELF</div>
+              <button class="cartridge" data-proj="magi">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-nodejs-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">MAGI_AI</span>
+                    <span class="cart-tag">LOCAL_LLM // Node.js</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="magips">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-c-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">MAGIPS</span>
+                    <span class="cart-tag">PROC_MGR // C</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="magicc">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-python-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">MAGICC</span>
+                    <span class="cart-tag">DOCKER_CLEAN // Python</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="waygo">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-java-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">WAYGO</span>
+                    <span class="cart-tag">THESIS // Java</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="dotfiles">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-archlinux-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">DOTFILES</span>
+                    <span class="cart-tag">HYPRLAND // Arch</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="bash_scripts">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-bash-plain"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">BASH_SCRIPTS</span>
+                    <span class="cart-tag">DESKTOP // Bash</span>
+                  </span>
+                </span>
+              </button>
+              <button class="cartridge" data-proj="archive">
+                <span class="cart-grip"></span>
+                <span class="cart-label">
+                  <i class="devicon-github-original"></i>
+                  <span class="cart-text">
+                    <span class="cart-title">ARCHIVE</span>
+                    <span class="cart-tag">UNI_PROJECTS // Mixed</span>
+                  </span>
+                </span>
+              </button>
             </div>
           </div>
         </div>
