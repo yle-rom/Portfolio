@@ -60,16 +60,39 @@
       <div class="scanlines"></div>
 
       <div id="osd-nav">
-        <div id="osd-toggle">
-          <span class="osd-prompt">SELECT</span> ▶ [ CH 00 ]
+        <div class="osd-bar">
+          <!-- Remote-style zap buttons: previous / next channel -->
+          <div class="osd-zap-pair">
+            <button class="osd-zap" id="ch-up" aria-label="Next channel">
+              CH ▲
+            </button>
+            <button class="osd-zap" id="ch-down" aria-label="Previous channel">
+              CH ▼
+            </button>
+          </div>
+          <button
+            id="osd-toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="osd-dropdown"
+          >
+            <span class="osd-prompt">SELECT</span> [
+            <span id="osd-current">CH 00</span> ▾ ]
+          </button>
         </div>
         <div id="osd-dropdown">
-          <div class="osd-option" data-channel="main-menu">CH 00: MAIN</div>
-          <div class="osd-option" data-channel="info">CH 01: INFO</div>
-          <div class="osd-option" data-channel="skills">CH 02: SKIL</div>
-          <div class="osd-option" data-channel="projects">CH 03: PROJ</div>
-          <div class="osd-option" data-channel="agent">CH 04: AGNT</div>
-          <div class="osd-option" data-channel="contact">CH 05: CONT</div>
+          <button class="osd-option" data-channel="main-menu">
+            CH 00: MAIN
+          </button>
+          <button class="osd-option" data-channel="info">CH 01: INFO</button>
+          <button class="osd-option" data-channel="skills">CH 02: SKIL</button>
+          <button class="osd-option" data-channel="projects">
+            CH 03: PROJ
+          </button>
+          <button class="osd-option" data-channel="agent">CH 04: AGNT</button>
+          <button class="osd-option" data-channel="contact">
+            CH 05: CONT
+          </button>
         </div>
       </div>
 

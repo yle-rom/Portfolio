@@ -257,10 +257,58 @@ html {
   align-items: flex-end;
 }
 
-#osd-toggle {
+.osd-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Framed like a remote button so it reads as clickable; ▾ hints at the menu */
+#osd-toggle,
+.osd-zap {
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
+  font: inherit;
+  text-shadow: inherit;
   cursor: pointer;
   user-select: none;
-  margin-bottom: 15px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+#osd-toggle {
+  padding: 4px 16px;
+}
+
+.osd-zap-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.osd-zap {
+  flex: 1;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+#osd-toggle:hover,
+#osd-toggle[aria-expanded="true"],
+.osd-zap:hover {
+  background: var(--phosphor);
+  color: #000;
+  text-shadow: none;
+}
+
+#osd-toggle:focus-visible,
+.osd-zap:focus-visible,
+.osd-option:focus-visible {
+  outline: 2px dashed #fff;
+  outline-offset: 3px;
 }
 .osd-prompt {
 }
@@ -287,6 +335,14 @@ html {
 }
 
 .osd-option {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  text-shadow: inherit;
+  text-align: right;
   cursor: pointer;
   user-select: none;
   font-size: 1.5rem;
@@ -1563,8 +1619,26 @@ html {
     z-index: 9999;
   }
 
-  #osd-toggle {
+  .osd-bar {
+    gap: 6px;
     margin-bottom: 8px;
+  }
+
+  #osd-toggle {
+    padding: 2px 8px;
+    border-width: 1px;
+  }
+
+  /* Side by side on phones: stacked they'd be too short to tap */
+  .osd-zap-pair {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .osd-zap {
+    font-size: 0.6rem;
+    padding: 0 8px;
+    border-width: 1px;
   }
 
   #osd-dropdown {

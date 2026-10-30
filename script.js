@@ -116,10 +116,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1200);
   });
 
+  const setDropdown = (open) => {
+    osdDropdown.style.display = open ? "flex" : "none";
+    osdToggle.setAttribute("aria-expanded", open);
+  };
+
   osdToggle.addEventListener("click", () => {
-    osdDropdown.style.display =
-      osdDropdown.style.display === "flex" ? "none" : "flex";
+    setDropdown(osdDropdown.style.display !== "flex");
   });
+
+  // Channel order for the CH ▲ / CH ▼ zap buttons (wraps around like a TV)
+  const channelOrder = [
+    "main-menu",
+    "info",
+    "skills",
+    "projects",
+    "agent",
+    "contact",
+  ];
+  const channelDisplayMap = {
+    "main-menu": "CH 00",
+    info: "CH 01",
+    skills: "CH 02",
+    projects: "CH 03",
+    agent: "CH 04",
+    contact: "CH 05",
+  };
+  let currentChannel = "main-menu";
 
   const changeChannel = (channelId) => {
     zapSound.currentTime = 0;
@@ -127,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const innerStatic = document.getElementById("inner-static");
     innerStatic.style.opacity = "0.8";
-    osdDropdown.style.display = "none";
+    setDropdown(false);
+    currentChannel = channelId;
 
     setTimeout(() => {
       innerStatic.style.opacity = "0.15";
@@ -145,19 +169,19 @@ document.addEventListener("DOMContentLoaded", () => {
         startTypewriter();
       }
 
-      const channelDisplayMap = {
-        "main-menu": "CH 00",
-        info: "CH 01",
-        skills: "CH 02",
-        projects: "CH 03",
-        agent: "CH 04",
-        contact: "CH 05",
-      };
-
-      osdToggle.innerHTML = `<span class="osd-prompt">SELECT</span> ▶ [ ${channelDisplayMap[channelId] || "CH ??"} ]`;
+      document.getElementById("osd-current").innerText =
+        channelDisplayMap[channelId] || "CH ??";
       syncBlinks();
     }, 300);
   };
+
+  const zap = (step) => {
+    const i = channelOrder.indexOf(currentChannel);
+    const n = channelOrder.length;
+    changeChannel(channelOrder[(i + step + n) % n]);
+  };
+  document.getElementById("ch-up").addEventListener("click", () => zap(1));
+  document.getElementById("ch-down").addEventListener("click", () => zap(-1));
 
   document.querySelectorAll(".channel-btn, .osd-option").forEach((el) => {
     el.addEventListener("click", (e) => {
