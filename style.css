@@ -11,10 +11,10 @@ button {
 
 /* Phosphor palette: bright = headings, borders, actions; text = reading; dim = meta */
 :root {
-  --phosphor: #39ff6a;
-  --phosphor-rgb: 57, 255, 106;
-  --text: #b8f5c4;
-  --dim: #5a9e6a;
+  --phosphor: #33ff33;
+  --phosphor-rgb: 51, 255, 51;
+  --text: #b4f7ad;
+  --dim: #4f9a4a;
   --deep: #053305;
 }
 
@@ -137,7 +137,7 @@ html {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: white;
+  background-color: var(--text);
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
@@ -307,7 +307,7 @@ html {
 #osd-toggle:focus-visible,
 .osd-zap:focus-visible,
 .osd-option:focus-visible {
-  outline: 2px dashed #fff;
+  outline: 2px dashed var(--text);
   outline-offset: 3px;
 }
 .osd-prompt {
@@ -337,12 +337,12 @@ html {
 .osd-option {
   background: none;
   border: none;
-  padding: 0;
   color: inherit;
   font-family: inherit;
   font-weight: inherit;
   text-shadow: inherit;
   text-align: right;
+  padding: 2px 6px;
   cursor: pointer;
   user-select: none;
   font-size: 1.5rem;
@@ -352,9 +352,9 @@ html {
 
 .osd-option:hover {
   opacity: 1;
-  text-shadow:
-    0 0 8px var(--phosphor),
-    0 0 15px #fff;
+  background: var(--phosphor);
+  color: #000;
+  text-shadow: none;
 }
 
 #programs-container {
@@ -1043,7 +1043,7 @@ html {
 .cartridge:focus-visible,
 .fighter-btn:focus-visible,
 .step-btn:focus-visible {
-  outline: 2px dashed #fff;
+  outline: 2px dashed var(--text);
   outline-offset: 2px;
 }
 
@@ -1252,9 +1252,7 @@ html {
 .contact-link:hover {
   background-color: var(--phosphor);
   color: #000;
-  text-shadow:
-    0 0 10px #fff,
-    0 0 20px var(--phosphor);
+  text-shadow: none;
 }
 
 @keyframes rapid-flash-green {
@@ -1532,8 +1530,8 @@ html {
 }
 
 #mute-btn:hover .speaker-svg {
-  color: #fff;
-  filter: drop-shadow(0 0 8px #fff);
+  color: var(--phosphor);
+  filter: drop-shadow(0 0 8px var(--phosphor));
 }
 
 /* Hide the cross by default */
