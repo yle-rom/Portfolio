@@ -136,10 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const bioText = `> INITIALIZING...
 > LOADING DATA... SUCCESS.
 
-> NAME: ROMANOS_KOTSIS 
-> ROLE: BACKEND_SYSTEMS_ENGINEER
-> BASE: IOANNINA_GREECE
-> STATUS: CURRENTLY DEPLOYED AT KEYVOTO`;
+> NAME: ROMANOS_KOTSIS
+> ROLE: BACKEND_ENGINEER // PYTHON · JAVA
+> BASE: IOANNINA_GR // REMOTE
+> NOW: KEYVOTO_DATA_CRAWLING
+> EDU: M.ENG_CSE_UOI
+> STATUS: OPEN_TO_BACKEND_ROLES`;
 
   const typewriterElement = document.getElementById("typewriter-text");
   let typeInterval;
@@ -155,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         clearInterval(typeInterval);
       }
-    }, 40);
+    }, 20);
   };
 
   // Contact Timer Logic
