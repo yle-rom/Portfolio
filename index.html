@@ -47,7 +47,8 @@
           <div class="osd-option" data-channel="info">CH 01: INFO</div>
           <div class="osd-option" data-channel="skills">CH 02: SKIL</div>
           <div class="osd-option" data-channel="projects">CH 03: PROJ</div>
-          <div class="osd-option" data-channel="contact">CH 04: CONT</div>
+          <div class="osd-option" data-channel="agent">CH 04: AGNT</div>
+          <div class="osd-option" data-channel="contact">CH 05: CONT</div>
         </div>
       </div>
 
@@ -119,6 +120,15 @@
                   <div class="d-block b4"></div>
                 </div>
                 <span class="grid-text">PROJECTS</span>
+              </button>
+
+              <!-- AGENT: Blinking Terminal Prompt -->
+              <button class="grid-item channel-btn" data-channel="agent">
+                <div class="hacker-icon prompt-icon">
+                  <span class="prompt-caret">&gt;</span
+                  ><span class="prompt-cursor">_</span>
+                </div>
+                <span class="grid-text">AGENT</span>
               </button>
 
               <!-- CONTACT: Pulsing Signal Wave -->
@@ -325,7 +335,35 @@
           </div>
         </div>
 
-        <!-- CH 04: Contact -->
+        <!-- CH 04: Agent -->
+        <div id="ch-agent" class="program">
+          <div class="howto-container">
+            <div class="howto-badge">HOW-TO // EP. 01</div>
+            <h2 class="howto-title">PAIR PROGRAMMING WITH THE MACHINE</h2>
+            <p class="howto-subtitle">FEATURING: CLAUDE CODE</p>
+            <div class="howto-layout">
+              <div class="howto-steps">
+                <button class="step-btn active-step" data-step="0">
+                  01 INITIALIZE
+                </button>
+                <button class="step-btn" data-step="1">02 ROLES</button>
+                <button class="step-btn" data-step="2">03 WORKFLOW</button>
+                <button class="step-btn" data-step="3">04 GUARDRAILS</button>
+                <button class="step-btn" data-step="4">05 OPTIMIZE</button>
+              </div>
+              <div class="howto-card">
+                <div class="howto-card-header">
+                  <span id="step-count">STEP 1/5</span>
+                  <span id="step-name">INITIALIZE</span>
+                </div>
+                <ul id="step-body" class="howto-list"></ul>
+                <button id="step-next" class="step-next">NEXT STEP ▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CH 05: Contact -->
         <div id="ch-contact" class="program">
           <div class="infomercial-container">
             <h1 class="flash-text">!!! URGENT BROADCAST !!!</h1>

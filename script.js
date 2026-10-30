@@ -118,7 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
         info: "CH 01",
         skills: "CH 02",
         projects: "CH 03",
-        contact: "CH 04",
+        agent: "CH 04",
+        contact: "CH 05",
       };
 
       osdToggle.innerHTML = `<span class="osd-prompt">SELECT</span> ▶ [ ${channelDisplayMap[channelId] || "CH ??"} ]`;
@@ -356,4 +357,76 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // --- AGENT HOW-TO SHOW LOGIC ---
+  const agentSteps = [
+    {
+      name: "INITIALIZE",
+      points: [
+        "WRITE THE BRIEF BEFORE THE FIRST PROMPT: THE GOAL, WHAT DONE LOOKS LIKE, AND THE HARD RULES.",
+        "RULES LIVE IN A CLAUDE.MD FILE THE AGENT READS EVERY SESSION: HOW TO TALK TO ME, WHAT IT MUST NEVER TOUCH, AND HOW I WANT WORK DELIVERED.",
+      ],
+    },
+    {
+      name: "ROLES",
+      points: [
+        "I AM THE ARCHITECT AND ORCHESTRATOR: I OWN THE DESIGN, THE SCOPE AND THE TRADE-OFFS.",
+        "CLAUDE CODE IS THE BUILDER: IT PROPOSES OPTIONS, WRITES THE CODE AND EXPLAINS THE WHY. DESIGN CALLS COME BACK TO ME.",
+      ],
+    },
+    {
+      name: "WORKFLOW",
+      points: [
+        "PLAN → APPROVE → BUILD IN SMALL STEPS → RUN IT TO VERIFY → ONE COMMIT PER CHANGE.",
+        "ANALYZE BEFORE BUILDING. ONE STEP AT A TIME.",
+        "A SHORT STATUS LINE TRACKS WHAT IS DONE, WHAT IS IN PROGRESS AND WHAT IS PARKED.",
+      ],
+    },
+    {
+      name: "GUARDRAILS",
+      points: [
+        "IT ASKS BEFORE EDITING AND SHOWS WHAT A CHANGE AFFECTS FIRST.",
+        "NOTHING IS DONE UNTIL IT IS RUN AND CHECKED: A REAL TEST, A DATABASE QUERY, A RENDERED PAGE.",
+        "CONFIGS ARE BACKED UP BEFORE ANY CHANGE. ONE COMMIT PER CHANGE, SO ANY STEP REVERTS IN ONE COMMAND.",
+        "PRODUCTION IS OFF-LIMITS: IT PREPARES THE FILES AND EXACT COMMANDS, I RUN THEM.",
+      ],
+    },
+    {
+      name: "OPTIMIZE",
+      points: [
+        "IT KEEPS MEMORY FILES ON HOW I WORK AND UPDATES THEM AS I USE IT.",
+        "CORRECT IT TWICE AND THE CORRECTION BECOMES A PERMANENT RULE.",
+        "PERIODICALLY ASK FOR FOUND PATTERNS ON MY WORKFLOW AND HOW TO IMPROVE IT",
+        "HANDOFF NOTES LET A NEW SESSION PICK UP WHERE THE LAST ONE STOPPED.",
+      ],
+    },
+  ];
+
+  const stepCount = document.getElementById("step-count");
+  const stepName = document.getElementById("step-name");
+  const stepBody = document.getElementById("step-body");
+  const stepButtons = document.querySelectorAll(".step-btn");
+  let currentStep = 0;
+
+  const showStep = (index) => {
+    currentStep = index;
+    const step = agentSteps[index];
+    stepCount.innerText = `STEP ${index + 1}/${agentSteps.length}`;
+    stepName.innerText = step.name;
+    stepBody.innerHTML = step.points.map((p) => `<li>${p}</li>`).join("");
+    stepButtons.forEach((b) => b.classList.remove("active-step"));
+    stepButtons[index].classList.add("active-step");
+  };
+
+  stepButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      showStep(Number(e.currentTarget.getAttribute("data-step")));
+    });
+  });
+
+  document.getElementById("step-next").addEventListener("click", () => {
+    showStep((currentStep + 1) % agentSteps.length);
+  });
+
+  showStep(0);
 });
