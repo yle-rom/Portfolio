@@ -20,6 +20,26 @@ html {
   perspective: 1000px;
 }
 
+#tune-hint {
+  position: fixed;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid #0f0;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #0f0;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: blink 1.2s step-end infinite;
+}
+
 #tv-container {
   position: relative;
   width: 100vw;
@@ -566,18 +586,20 @@ html {
 }
 
 /* CH 03: Projects */
+/* Title sits in the flow right above the panels, so the pair centers together */
+#ch-projects.active-program {
+  flex-direction: column;
+}
+
 .flashing-title {
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  font-family: "Courier New", Courier, monospace;
   color: #0f0;
   text-align: center;
   font-size: 2.5rem;
   text-shadow:
     0 0 10px #0f0,
     0 0 20px #0f0;
-  margin: 0;
+  margin: 0 0 25px;
   width: 100%;
   animation: blink 1s step-end infinite;
   z-index: 10;
@@ -586,10 +608,10 @@ html {
 .ps1-container {
   display: flex;
   width: 75%;
-  height: 55%;
+  height: 65%;
   min-height: 400px;
-  max-height: 500px;
-  margin: 130px auto 0;
+  max-height: 620px;
+  margin: 0 auto;
   gap: 30px;
   font-family: "Courier New", Courier, monospace;
   align-items: flex-start;
@@ -678,6 +700,40 @@ html {
   transition: all 0.2s;
 }
 
+.save-block i {
+  font-size: 30px;
+  color: #0f0;
+}
+
+/* Visible green scrollbars so overflowing text and slots are discoverable */
+.tv-screen,
+.memory-card {
+  scrollbar-width: thin;
+  scrollbar-color: #0f0 #000;
+}
+
+.tv-screen::-webkit-scrollbar,
+.memory-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tv-screen::-webkit-scrollbar-track,
+.memory-card::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.tv-screen::-webkit-scrollbar-thumb,
+.memory-card::-webkit-scrollbar-thumb {
+  background: #0f0;
+}
+
+.save-block:focus-visible,
+.fighter-btn:focus-visible,
+.step-btn:focus-visible {
+  outline: 2px dashed #fff;
+  outline-offset: 2px;
+}
+
 .save-block:hover,
 .save-block.active-save {
   border-color: #0f0;
@@ -742,6 +798,7 @@ html {
   display: flex;
   gap: 25px;
   align-items: stretch;
+  height: 400px; /* fixed, so longer steps scroll instead of resizing the box */
 }
 
 .howto-steps {
@@ -790,6 +847,10 @@ html {
 
 .howto-list {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #0f0 #000;
   margin: 15px 0;
   padding-left: 20px;
   line-height: 1.5;
@@ -1422,6 +1483,7 @@ html {
 
   /* --- CH 03: PROJECTS --- */
   .flashing-title {
+    position: absolute;
     top: 10px;
     left: 15px; /* Pin to the left instead of the center */
     transform: none; /* Remove the centering transform */
@@ -1548,6 +1610,11 @@ html {
     font-size: 1.2rem;
   }
 
+  #tune-hint {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
   .howto-container {
     width: 94%;
     padding: 14px;
@@ -1569,6 +1636,7 @@ html {
 
   .howto-layout {
     gap: 10px;
+    height: 190px;
   }
 
   .step-btn {

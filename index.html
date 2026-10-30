@@ -4,11 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Romanos Kotsis</title>
+    <meta
+      name="description"
+      content="Romanos Kotsis: backend engineer (Python · Java) in Ioannina, Greece. Projects, skills and contact."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://romanoskotsis.com/" />
+    <meta property="og:title" content="Romanos Kotsis | Backend Engineer" />
+    <meta
+      property="og:description"
+      content="Backend engineer (Python · Java). Tune in to the CRT portfolio."
+    />
+    <meta
+      property="og:image"
+      content="https://romanoskotsis.com/resources/tv-bg.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='3' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%230f0'%3E%3E_%3C/text%3E%3C/svg%3E"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.18.0/devicon.min.css"
     />
   </head>
   <body>
@@ -32,6 +52,7 @@
           alt="TV Stack"
         />
       </div>
+      <div id="tune-hint">▶ CLICK THE TV TO TUNE IN</div>
     </div>
 
     <div id="inside-tv">
@@ -92,7 +113,7 @@
         <!-- CH 00: Main Menu -->
         <div id="ch-main-menu" class="program active-program">
           <div class="os-window">
-            <div class="os-header">PORTFOLIO.OS v1.0</div>
+            <div class="os-header">PORTFOLIO.OS v2.0</div>
             <div class="os-grid">
               <!-- INFO: Radar Sweep -->
               <button class="grid-item channel-btn" data-channel="info">
@@ -159,8 +180,8 @@
             </div>
             <div class="news-ticker">
               <div class="ticker-text">
-                +++ PYTHON · JAVA · C +++ SPRING BOOT · MONGODB · POSTGRESQL
-                +++ DOCKER · LINUX · VPS +++ SELF-HOSTED ON ARCH BTW +++
+                +++ PYTHON · JAVA · C +++ SPRING BOOT · MONGODB · POSTGRESQL +++
+                DOCKER · LINUX · VPS +++ SELF-HOSTED ON ARCH BTW +++
               </div>
             </div>
           </div>
@@ -261,71 +282,85 @@
 
             <div class="memory-card">
               <div class="mc-header">MEMORY CARD [SLOT 1]</div>
-              <div class="save-block" data-proj="magi">
-                <i
-                  class="devicon-nodejs-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="magi"
+              >
+                <i class="devicon-nodejs-plain"></i>
                 <div class="save-info">
                   <span class="save-title">MAGI_AI.sav</span>
                   <span class="save-date">LOCAL_LLM // Node.js</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="magips">
-                <i
-                  class="devicon-c-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="magips"
+              >
+                <i class="devicon-c-plain"></i>
                 <div class="save-info">
                   <span class="save-title">MAGIPS.sav</span>
                   <span class="save-date">PROC_MGR // C</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="magicc">
-                <i
-                  class="devicon-python-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="magicc"
+              >
+                <i class="devicon-python-plain"></i>
                 <div class="save-info">
                   <span class="save-title">MAGICC.sav</span>
                   <span class="save-date">DOCKER_CLEAN // Python</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="waygo">
-                <i
-                  class="devicon-java-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="waygo"
+              >
+                <i class="devicon-java-plain"></i>
                 <div class="save-info">
                   <span class="save-title">WAYGO.sav</span>
                   <span class="save-date">THESIS // Java</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="dotfiles">
-                <i
-                  class="devicon-archlinux-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="dotfiles"
+              >
+                <i class="devicon-archlinux-plain"></i>
                 <div class="save-info">
                   <span class="save-title">DOTFILES.sav</span>
                   <span class="save-date">HYPRLAND // Arch</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="bash_scripts">
-                <i
-                  class="devicon-bash-plain"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="bash_scripts"
+              >
+                <i class="devicon-bash-plain"></i>
                 <div class="save-info">
                   <span class="save-title">BASH_SCRIPTS.sav</span>
                   <span class="save-date">DESKTOP // Bash</span>
                 </div>
               </div>
-              <div class="save-block" data-proj="archive">
-                <i
-                  class="devicon-github-original"
-                  style="font-size: 30px !important"
-                ></i>
+              <div
+                class="save-block"
+                tabindex="0"
+                role="button"
+                data-proj="archive"
+              >
+                <i class="devicon-github-original"></i>
                 <div class="save-info">
                   <span class="save-title">ARCHIVE.sav</span>
                   <span class="save-date">UNI_PROJECTS // Mixed</span>
@@ -383,6 +418,7 @@
                 <a
                   href="https://github.com/yle-rom"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="contact-link"
                   >GITHUB.COM/YLE-ROM</a
                 >
@@ -392,6 +428,7 @@
                 <a
                   href="https://linkedin.com/in/romanos-kotsis"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="contact-link"
                   >LINKEDIN.COM/IN/ROMANOS-KOTSIS</a
                 >
