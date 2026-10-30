@@ -9,6 +9,23 @@ button {
   font-family: inherit;
 }
 
+/* Phosphor palette: bright = headings, borders, actions; text = reading; dim = meta */
+:root {
+  --phosphor: #39ff6a;
+  --phosphor-rgb: 57, 255, 106;
+  --text: #b8f5c4;
+  --dim: #5a9e6a;
+  --deep: #053305;
+}
+
+:root[data-theme="amber"] {
+  --phosphor: #ffb000;
+  --phosphor-rgb: 255, 176, 0;
+  --text: #ffdca8;
+  --dim: #a8823a;
+  --deep: #3a2600;
+}
+
 body,
 html {
   font-family: "ShureTechMono", "Courier New", monospace;
@@ -40,13 +57,13 @@ html {
   z-index: 50;
   padding: 8px 16px;
   background: rgba(0, 0, 0, 0.75);
-  border: 2px solid #0f0;
-  color: #0f0;
+  border: 2px solid var(--phosphor);
+  color: var(--phosphor);
   font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 2px;
-  text-shadow: 0 0 5px #0f0;
+  text-shadow: 0 0 5px var(--phosphor);
   white-space: nowrap;
   pointer-events: none;
   animation: blink 1s step-end infinite;
@@ -170,14 +187,14 @@ html {
   position: absolute;
   top: -15px;
   left: 10px;
-  color: #0f0;
+  color: var(--phosphor);
   font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
   text-shadow:
-    0 0 5px #0f0,
-    0 0 10px #0f0;
+    0 0 5px var(--phosphor),
+    0 0 10px var(--phosphor);
 }
 
 .os-grid {
@@ -213,14 +230,14 @@ html {
 
 .grid-text {
   font-family: "ShureTechMono", "Courier New", monospace;
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow:
-    0 0 5px #0f0,
-    0 0 10px #0f0;
+    0 0 5px var(--phosphor),
+    0 0 10px var(--phosphor);
 }
 
 #osd-nav {
@@ -229,12 +246,12 @@ html {
   right: 40px;
   z-index: 100;
   font-family: "ShureTechMono", "Courier New", monospace;
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 2rem;
   font-weight: bold;
   text-shadow:
-    0 0 5px #0f0,
-    0 0 10px #0f0;
+    0 0 5px var(--phosphor),
+    0 0 10px var(--phosphor);
   display: none;
   flex-direction: column;
   align-items: flex-end;
@@ -246,7 +263,6 @@ html {
   margin-bottom: 15px;
 }
 .osd-prompt {
-  animation: slow-blink 1s step-end infinite;
 }
 
 @keyframes slow-blink {
@@ -265,7 +281,7 @@ html {
   align-items: flex-end;
   gap: 10px;
   background-color: rgba(0, 0, 0, 0.95);
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   padding: 10px;
   z-index: 9999;
 }
@@ -281,7 +297,7 @@ html {
 .osd-option:hover {
   opacity: 1;
   text-shadow:
-    0 0 8px #0f0,
+    0 0 8px var(--phosphor),
     0 0 15px #fff;
 }
 
@@ -322,11 +338,11 @@ html {
   width: 80%;
   max-width: 800px;
   background-color: rgba(5, 15, 5, 0.9);
-  border: 4px solid #0f0;
+  border: 4px solid var(--phosphor);
   padding: 50px 40px;
   position: relative;
   box-shadow:
-    inset 0 0 20px rgba(0, 255, 0, 0.2),
+    inset 0 0 20px rgba(var(--phosphor-rgb), 0.2),
     10px 10px 0px rgba(0, 0, 0, 0.9);
   margin-bottom: 50px;
 }
@@ -336,25 +352,25 @@ html {
   top: -15px;
   left: 20px;
   background-color: #000;
-  color: #0f0;
-  border: 2px solid #0f0;
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
   padding: 5px 15px;
   font-family: "ShureTechMono", "Courier New", monospace;
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 2px;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+  box-shadow: 0 0 10px rgba(var(--phosphor-rgb), 0.4);
 }
 
 .panel-content {
-  color: #0f0;
+  color: var(--phosphor);
   font-family: "ShureTechMono", "Courier New", monospace;
 }
 
 .info-title {
-  color: #0f0;
+  color: var(--phosphor);
   margin-top: 0;
-  text-shadow: 0 0 8px #0f0;
+  text-shadow: 0 0 8px var(--phosphor);
 }
 
 .news-ticker {
@@ -362,23 +378,23 @@ html {
   bottom: 8%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.95);
-  color: #0f0;
+  color: var(--phosphor);
   font-family: "ShureTechMono", "Courier New", monospace;
   font-weight: bold;
   font-size: 1.5rem;
   padding: 10px 0;
   overflow: hidden;
   white-space: nowrap;
-  border-top: 2px solid #0f0;
-  border-bottom: 2px solid #0f0;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+  border-top: 2px solid var(--phosphor);
+  border-bottom: 2px solid var(--phosphor);
+  box-shadow: 0 0 20px rgba(var(--phosphor-rgb), 0.4);
 }
 
 .ticker-text {
   display: inline-block;
   padding-left: 100%;
   animation: ticker-scroll 20s linear infinite;
-  text-shadow: 0 0 8px #0f0;
+  color: var(--text);
 }
 
 @keyframes ticker-scroll {
@@ -397,14 +413,13 @@ html {
 }
 
 #typewriter-text {
-  color: #0f0;
+  color: var(--text);
   white-space: pre-wrap;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
 .cursor {
   display: inline-block;
-  color: #0f0;
+  color: var(--phosphor);
   font-weight: bold;
   animation: blink 1s step-end infinite;
 }
@@ -430,11 +445,10 @@ html {
 }
 
 .fighter-header {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 2.5rem;
-  text-shadow: 0 0 10px #0f0;
+  text-shadow: 0 0 10px var(--phosphor);
   margin-bottom: 30px;
-  animation: blink 1s step-end infinite;
 }
 
 .roster-layout {
@@ -461,26 +475,26 @@ html {
 }
 .roster-grid::-webkit-scrollbar-track {
   background: #000;
-  border: 1px solid #0f0;
+  border: 1px solid var(--phosphor);
 }
 .roster-grid::-webkit-scrollbar-thumb {
-  background: #0f0;
+  background: var(--phosphor);
 }
 
 .roster-title {
   grid-column: span 2;
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.5rem;
   font-weight: bold;
-  border-bottom: 2px solid #0f0;
+  border-bottom: 2px solid var(--phosphor);
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
 .fighter-btn {
   background: transparent;
-  color: #0f0;
-  border: 2px solid #0f0;
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
   padding: 15px 5px;
   font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 1.2rem;
@@ -490,27 +504,27 @@ html {
 }
 
 .fighter-btn:hover {
-  background: #0f0;
+  background: var(--phosphor);
   color: #000;
   transform: scale(1.1);
-  box-shadow: 0 0 15px #0f0;
+  box-shadow: 0 0 15px var(--phosphor);
 }
 
 .fighter-display {
   width: 35%;
-  border: 4px double #0f0;
+  border: 4px double var(--phosphor);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgba(5, 15, 5, 0.8);
-  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
+  box-shadow: inset 0 0 20px rgba(var(--phosphor-rgb), 0.2);
 }
 
 .fighter-logo-container {
   width: 120px;
   height: 120px;
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
@@ -522,24 +536,21 @@ html {
 #f-icon {
   font-size: 85px !important;
   line-height: 120px !important;
-  color: #0f0 !important;
-  text-shadow: 0 0 4px #0f0 !important;
-  filter: grayscale(100%) sepia(100%) hue-rotate(85deg) saturate(3000%)
-    brightness(1.2) !important;
+  color: var(--phosphor) !important;
+  text-shadow: 0 0 4px var(--phosphor) !important;
   -webkit-font-smoothing: none !important;
 }
 
 #f-name {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 2rem;
   margin: 0;
-  text-shadow: 0 0 5px #0f0;
+  text-shadow: 0 0 5px var(--phosphor);
 }
 
 #f-class {
-  color: #0f0;
+  color: var(--dim);
   margin: 5px 0 20px 0;
-  opacity: 0.8;
 }
 
 /* Retro Rank Display */
@@ -547,7 +558,7 @@ html {
   width: 100%;
   margin-top: 10px;
   background: #000;
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   padding: 15px;
   box-sizing: border-box;
 }
@@ -565,7 +576,7 @@ html {
 }
 
 .rank-label {
-  color: #0f0;
+  color: var(--text);
   font-size: 1.2rem;
 }
 
@@ -574,12 +585,12 @@ html {
   font-size: 1.5rem;
   text-shadow:
     0 0 10px #fff,
-    0 0 20px #0f0;
+    0 0 20px var(--phosphor);
   animation: pulse-glow 2s infinite alternate;
 }
 
 .exp-value {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.2rem;
   opacity: 0.9;
 }
@@ -588,12 +599,12 @@ html {
   0% {
     text-shadow:
       0 0 5px #fff,
-      0 0 10px #0f0;
+      0 0 10px var(--phosphor);
   }
   100% {
     text-shadow:
       0 0 10px #fff,
-      0 0 25px #0f0;
+      0 0 25px var(--phosphor);
   }
 }
 
@@ -605,12 +616,12 @@ html {
 
 .flashing-title {
   font-family: "ShureTechMono", "Courier New", monospace;
-  color: #0f0;
+  color: var(--phosphor);
   text-align: center;
   font-size: 2.5rem;
   text-shadow:
-    0 0 10px #0f0,
-    0 0 20px #0f0;
+    0 0 10px var(--phosphor),
+    0 0 20px var(--phosphor);
   margin: 0 0 25px;
   width: 100%;
   animation: blink 1s step-end infinite;
@@ -646,13 +657,13 @@ html {
   display: flex;
   flex-direction: column;
   background: #0b120b;
-  border: 4px solid #0f0;
+  border: 4px solid var(--phosphor);
   border-radius: 18px;
   padding: 14px 14px 0;
   box-sizing: border-box;
   box-shadow:
-    inset 0 0 20px rgba(0, 255, 0, 0.15),
-    0 0 15px rgba(0, 255, 0, 0.2);
+    inset 0 0 20px rgba(var(--phosphor-rgb), 0.15),
+    0 0 15px rgba(var(--phosphor-rgb), 0.2);
 }
 
 .crt-bezel {
@@ -660,10 +671,10 @@ html {
   flex: 1;
   min-height: 0;
   background: #020602;
-  border: 3px solid #053305;
+  border: 3px solid var(--deep);
   border-radius: 24px / 30px; /* slight CRT curvature */
   overflow: hidden;
-  box-shadow: inset 0 0 40px rgba(0, 255, 0, 0.15);
+  box-shadow: inset 0 0 40px rgba(var(--phosphor-rgb), 0.15);
 }
 
 .tv-screen {
@@ -676,11 +687,11 @@ html {
 }
 
 .tv-idle {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.3rem;
   text-align: center;
   margin-top: 25%;
-  text-shadow: 0 0 8px #0f0;
+  text-shadow: 0 0 8px var(--phosphor);
   animation: blink 1s step-end infinite;
 }
 
@@ -705,10 +716,9 @@ html {
   align-items: center;
   height: 34px;
   padding: 0 6px;
-  color: #0f0;
+  color: var(--dim);
   font-size: 0.8rem;
   letter-spacing: 3px;
-  opacity: 0.8;
 }
 
 .crt-knobs {
@@ -719,7 +729,7 @@ html {
 .crt-knobs span {
   width: 14px;
   height: 14px;
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   border-radius: 50%;
 }
 
@@ -733,11 +743,11 @@ html {
   gap: 18px;
   padding: 0 20px;
   background: #0b120b;
-  border: 4px solid #0f0;
+  border: 4px solid var(--phosphor);
   border-top-width: 2px;
   border-radius: 0 0 14px 14px;
   box-sizing: border-box;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(var(--phosphor-rgb), 0.2);
 }
 
 .console-slot {
@@ -747,13 +757,13 @@ html {
   align-items: center;
   justify-content: center;
   background: #000;
-  border: 2px solid #053305;
+  border: 2px solid var(--deep);
   box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
 
 .slot-cart {
-  background: #0f0;
+  background: var(--phosphor);
   color: #000;
   font-size: 0.8rem;
   font-weight: bold;
@@ -782,13 +792,13 @@ html {
   height: 12px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #053305;
-  border: 1px solid #0f0;
+  background: var(--deep);
+  border: 1px solid var(--phosphor);
 }
 
 .console-led.on {
-  background: #0f0;
-  box-shadow: 0 0 8px #0f0;
+  background: var(--phosphor);
+  box-shadow: 0 0 8px var(--phosphor);
 }
 
 .console-led.busy {
@@ -796,17 +806,16 @@ html {
 }
 
 .console-name {
-  color: #0f0;
+  color: var(--dim);
   font-size: 0.75rem;
   letter-spacing: 2px;
-  opacity: 0.8;
 }
 
 /* --- README text on the TV --- */
 .rm-h1 {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.4rem;
-  border-bottom: 2px dashed #0f0;
+  border-bottom: 2px dashed var(--phosphor);
   padding-bottom: 5px;
   margin: 0 0 10px 0;
 }
@@ -815,7 +824,7 @@ html {
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   text-shadow: none !important;
-  background-color: #0f0 !important;
+  background-color: var(--phosphor) !important;
   font-size: 1rem !important;
   margin: 10px 0 5px 0 !important;
   display: inline-block !important;
@@ -825,9 +834,9 @@ html {
 }
 
 .rm-p {
-  color: #0f0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.6;
   margin-bottom: 10px;
   white-space: pre-wrap;
 }
@@ -840,18 +849,18 @@ html {
   gap: 10px;
   padding: 15px;
   background: rgba(5, 15, 5, 0.9);
-  border: 4px solid #0f0;
-  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2);
+  border: 4px solid var(--phosphor);
+  box-shadow: inset 0 0 20px rgba(var(--phosphor-rgb), 0.2);
   overflow-y: auto;
   box-sizing: border-box;
 }
 
 .shelf-header {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  border-bottom: 2px dashed #0f0;
+  border-bottom: 2px dashed var(--phosphor);
   padding-bottom: 10px;
 }
 
@@ -863,8 +872,8 @@ html {
   height: 64px;
   padding: 0;
   background: #0b120b;
-  color: #0f0;
-  border: 2px solid #0f0;
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
   border-radius: 4px 10px 10px 4px;
   font-family: inherit;
   text-align: left;
@@ -881,10 +890,10 @@ html {
   flex-shrink: 0;
   background: repeating-linear-gradient(
     to bottom,
-    #0f0 0 2px,
+    var(--phosphor) 0 2px,
     transparent 2px 6px
   );
-  border-right: 2px solid #0f0;
+  border-right: 2px solid var(--phosphor);
   opacity: 0.6;
 }
 
@@ -896,13 +905,13 @@ html {
   gap: 12px;
   margin: 6px 8px;
   padding: 0 10px;
-  background: rgba(0, 255, 0, 0.12);
-  border: 1px solid #053305;
+  background: rgba(var(--phosphor-rgb), 0.12);
+  border: 1px solid var(--deep);
 }
 
 .cart-label i {
   font-size: 28px;
-  color: #0f0;
+  color: var(--phosphor);
 }
 
 .cart-text {
@@ -916,6 +925,7 @@ html {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--dim);
 }
 
 .cart-title {
@@ -931,7 +941,7 @@ html {
 /* Lean toward the console on hover */
 .cartridge:hover {
   transform: translateX(-8px);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+  box-shadow: 0 0 10px rgba(var(--phosphor-rgb), 0.4);
 }
 
 .cartridge.in-console {
@@ -956,7 +966,7 @@ html {
 .tv-screen,
 .cart-shelf {
   scrollbar-width: thin;
-  scrollbar-color: #0f0 #000;
+  scrollbar-color: var(--phosphor) #000;
 }
 
 .tv-screen::-webkit-scrollbar,
@@ -971,7 +981,7 @@ html {
 
 .tv-screen::-webkit-scrollbar-thumb,
 .cart-shelf::-webkit-scrollbar-thumb {
-  background: #0f0;
+  background: var(--phosphor);
 }
 
 .cartridge:focus-visible,
@@ -986,20 +996,20 @@ html {
   width: 85%;
   max-width: 900px;
   background-color: rgba(5, 15, 5, 0.85);
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   padding: 30px;
   position: relative;
   font-family: "ShureTechMono", "Courier New", monospace;
-  color: #0f0;
+  color: var(--phosphor);
   box-sizing: border-box;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(var(--phosphor-rgb), 0.2);
 }
 
 .howto-badge {
   position: absolute;
   top: -14px;
   left: 20px;
-  background-color: #0f0;
+  background-color: var(--phosphor);
   color: #000;
   padding: 2px 10px;
   font-weight: bold;
@@ -1011,14 +1021,14 @@ html {
   font-size: 1.8rem;
   text-align: center;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px #0f0;
+  text-shadow: 0 0 10px var(--phosphor);
 }
 
 .howto-subtitle {
   margin: 5px 0 25px;
   text-align: center;
-  opacity: 0.7;
   letter-spacing: 3px;
+  color: var(--dim);
 }
 
 .howto-layout {
@@ -1037,8 +1047,8 @@ html {
 
 .step-btn {
   background: transparent;
-  color: #0f0;
-  border: 2px solid #0f0;
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
   padding: 10px;
   font-family: inherit;
   font-size: 1rem;
@@ -1050,13 +1060,13 @@ html {
 
 .step-btn:hover,
 .step-btn.active-step {
-  background-color: #0f0;
+  background-color: var(--phosphor);
   color: #000;
 }
 
 .howto-card {
   flex: 1;
-  border: 4px dashed #0f0;
+  border: 4px dashed var(--phosphor);
   padding: 15px 25px;
   display: flex;
   flex-direction: column;
@@ -1067,9 +1077,9 @@ html {
   justify-content: space-between;
   font-size: 1.3rem;
   font-weight: bold;
-  border-bottom: 2px solid #0f0;
+  border-bottom: 2px solid var(--phosphor);
   padding-bottom: 8px;
-  text-shadow: 0 0 5px #0f0;
+  text-shadow: 0 0 5px var(--phosphor);
 }
 
 .howto-list {
@@ -1077,10 +1087,11 @@ html {
   min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #0f0 #000;
+  scrollbar-color: var(--phosphor) #000;
   margin: 15px 0;
   padding-left: 20px;
-  line-height: 1.5;
+  line-height: 1.65;
+  color: var(--text);
 }
 
 .howto-list li {
@@ -1090,8 +1101,8 @@ html {
 .step-next {
   align-self: flex-end;
   background: #000;
-  color: #0f0;
-  border: 2px solid #0f0;
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
   padding: 6px 14px;
   font-family: inherit;
   font-weight: bold;
@@ -1099,7 +1110,7 @@ html {
 }
 
 .step-next:hover {
-  background-color: #0f0;
+  background-color: var(--phosphor);
   color: #000;
 }
 
@@ -1109,7 +1120,7 @@ html {
   max-width: 800px;
   height: 75%;
   background-color: rgba(5, 15, 5, 0.85);
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -1118,50 +1129,47 @@ html {
   text-align: center;
   font-family: "ShureTechMono", "Courier New", monospace;
   box-sizing: border-box;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(var(--phosphor-rgb), 0.2);
 }
 
 .flash-text {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 2.2rem;
   margin: 0;
-  text-shadow: 0 0 10px #0f0;
+  text-shadow: 0 0 10px var(--phosphor);
   letter-spacing: 3px;
-  animation: rapid-flash-green 1s step-end infinite;
 }
 
 .infomercial-pitch {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.4rem;
-  text-shadow: 0 0 5px #0f0;
   margin: 0;
   line-height: 1.4;
 }
 
 .order-box {
   background-color: transparent;
-  border: 4px dashed #0f0;
+  border: 4px dashed var(--phosphor);
   padding: 15px 30px;
   width: 80%;
 }
 
 .order-title {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.8rem;
   margin: 0 0 10px 0;
-  text-shadow: 0 0 8px #0f0;
+  text-shadow: 0 0 8px var(--phosphor);
 }
 
 .contact-method {
   font-size: 1.5rem;
-  color: #0f0;
+  color: var(--phosphor);
   margin: 8px 0;
-  text-shadow: 0 0 5px #0f0;
   letter-spacing: 2px;
 }
 
 .fine-print {
-  color: #0f0;
+  color: var(--text);
   font-size: 0.8rem;
   opacity: 0.7;
   max-width: 85%;
@@ -1171,38 +1179,38 @@ html {
 
 .timer-box {
   background-color: #000;
-  color: #0f0;
+  color: var(--phosphor);
   padding: 10px 20px;
   font-size: 1.8rem;
-  border: 2px solid #0f0;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  border: 2px solid var(--phosphor);
+  box-shadow: 0 0 10px rgba(var(--phosphor-rgb), 0.5);
 }
 
 .contact-link {
-  color: #0f0;
+  color: var(--phosphor);
   text-decoration: none;
-  text-shadow: 0 0 5px #0f0;
+  text-shadow: 0 0 5px var(--phosphor);
   transition: all 0.2s ease;
 }
 
 .contact-link:hover {
-  background-color: #0f0;
+  background-color: var(--phosphor);
   color: #000;
   text-shadow:
     0 0 10px #fff,
-    0 0 20px #0f0;
+    0 0 20px var(--phosphor);
 }
 
 @keyframes rapid-flash-green {
   0%,
   49% {
     opacity: 1;
-    color: #0f0;
+    color: var(--phosphor);
   }
   50%,
   100% {
     opacity: 0.2;
-    color: #053305;
+    color: var(--deep);
   }
 }
 /* --- HACKER MENU ICONS (PURE CSS) --- */
@@ -1221,14 +1229,14 @@ html {
   justify-content: center;
   align-items: center;
   /* Adds a baseline glow to all icons */
-  filter: drop-shadow(0 0 5px #0f0);
+  filter: drop-shadow(0 0 5px var(--phosphor));
 }
 
 /* 1. INFO: Radar Sweep */
 .radar-icon {
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--phosphor-rgb), 0.1) 0%, transparent 70%);
   overflow: hidden;
 }
 
@@ -1240,7 +1248,7 @@ html {
   bottom: 50%;
   right: 50%;
   transform-origin: bottom right;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.8));
+  background: linear-gradient(90deg, transparent, rgba(var(--phosphor-rgb), 0.8));
   animation: radar-spin 2s linear infinite;
 }
 
@@ -1258,8 +1266,8 @@ html {
 
 .bar {
   width: 14px;
-  background-color: #0f0;
-  box-shadow: 0 0 5px #0f0;
+  background-color: var(--phosphor);
+  box-shadow: 0 0 5px var(--phosphor);
   transform-origin: bottom;
   animation: bar-bounce 1s ease-in-out infinite alternate;
 }
@@ -1300,10 +1308,10 @@ html {
 }
 
 .d-block {
-  background-color: #0f0;
+  background-color: var(--phosphor);
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 5px #0f0;
+  box-shadow: 0 0 5px var(--phosphor);
   animation: block-flicker 2s infinite;
 }
 
@@ -1332,12 +1340,12 @@ html {
 
 /* 4. AGENT: Blinking Terminal Prompt */
 .prompt-icon {
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   box-sizing: border-box;
   font-family: "ShureTechMono", "Courier New", monospace;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #0f0;
+  color: var(--phosphor);
 }
 
 .prompt-cursor {
@@ -1351,7 +1359,7 @@ html {
 
 .ring {
   position: absolute;
-  border: 2px solid #0f0;
+  border: 2px solid var(--phosphor);
   border-radius: 50%;
   animation: signal-ripple 2s linear infinite;
   opacity: 0;
@@ -1407,10 +1415,9 @@ html {
 }
 
 .orientation-text {
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.5rem;
-  text-shadow: 0 0 10px #0f0;
-  animation: blink 1s step-end infinite;
+  text-shadow: 0 0 10px var(--phosphor);
   line-height: 1.5;
 }
 /* --- BOTTOM OSD: MUTE & VOLUME BAR --- */
@@ -1425,6 +1432,23 @@ html {
   gap: 15px; /* Spacing between speaker and the volume bar */
   z-index: 100;
   pointer-events: none;
+}
+
+#theme-btn {
+  pointer-events: auto;
+  margin-left: auto;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--phosphor);
+  border: 2px solid var(--phosphor);
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+#theme-btn:hover {
+  background: var(--phosphor);
+  color: #000;
 }
 
 #mute-btn {
@@ -1446,8 +1470,8 @@ html {
 .speaker-svg {
   width: 28px;
   height: 28px;
-  color: #0f0; /* Sets both the fill and stroke color */
-  filter: drop-shadow(0 0 4px #0f0);
+  color: var(--phosphor); /* Sets both the fill and stroke color */
+  filter: drop-shadow(0 0 4px var(--phosphor));
   transition: all 0.2s;
 }
 
@@ -1471,7 +1495,7 @@ html {
 }
 
 .is-muted .speaker-svg {
-  filter: drop-shadow(0 0 2px #0f0);
+  filter: drop-shadow(0 0 2px var(--phosphor));
   opacity: 0.8;
 }
 
@@ -1480,10 +1504,10 @@ html {
   flex-grow: 1;
   min-width: 0; /* CRUCIAL: Prevents the long text from expanding the container off-screen */
   font-family: "ShureTechMono", "Courier New", monospace;
-  color: #0f0;
+  color: var(--phosphor);
   font-size: 1.5rem;
   font-weight: bold;
-  text-shadow: 0 0 5px #0f0;
+  text-shadow: 0 0 5px var(--phosphor);
   white-space: nowrap;
   overflow: hidden; /* Safely chops off the excess bars at the edge of the screen */
   opacity: 0;
@@ -1585,7 +1609,7 @@ html {
   }
 
   .d-block {
-    box-shadow: 0 0 3px #0f0;
+    box-shadow: 0 0 3px var(--phosphor);
   }
 
   /* --- CH 01: INFO --- */
@@ -1804,7 +1828,7 @@ html {
   }
 
   .rm-p {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     margin-bottom: 6px;
   }
 
@@ -1893,6 +1917,13 @@ html {
   #tune-hint {
     font-size: 0.7rem;
     padding: 5px 10px;
+  }
+
+  #theme-btn {
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-width: 1px;
   }
 
   .howto-container {

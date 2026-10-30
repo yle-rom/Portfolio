@@ -32,6 +32,29 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   syncBlinks();
 
+  // --- PHOSPHOR THEME (green / amber), remembered per visitor ---
+  const themeBtn = document.getElementById("theme-btn");
+  const applyTheme = (theme) => {
+    if (theme === "amber") {
+      document.documentElement.dataset.theme = "amber";
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    themeBtn.innerText = `PHOSPHOR: ${theme === "amber" ? "AMB" : "GRN"}`;
+  };
+  let theme = "green";
+  try {
+    theme = localStorage.getItem("phosphor") || "green";
+  } catch {}
+  applyTheme(theme);
+  themeBtn.addEventListener("click", () => {
+    theme = theme === "amber" ? "green" : "amber";
+    applyTheme(theme);
+    try {
+      localStorage.setItem("phosphor", theme);
+    } catch {}
+  });
+
   // --- MUTE & VOLUME LOGIC ---
   const muteBtn = document.getElementById("mute-btn");
   const volumeOsd = document.getElementById("volume-osd");
@@ -347,13 +370,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   // Projects Memory Card Logic
   const projectData = {
-    magi: `<h1 class="rm-h1"># MAGI_AI</h1><p class="rm-p">> Private local assistant on one model (qwen3.5:9b via Ollama), with a CLI and an Electron UI.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- <b>Memory:</b> RAG (pgvector) over past chats, plus saved fact files for global and per-project context.</p><p class="rm-p">- <b>Tools:</b> web search via self-hosted SearXNG, file edits shown as diffs, approved terminal commands, secret files fenced off.</p><p class="rm-p">- <b>Sandbox:</b> code runs under bubblewrap with no network, no $HOME and a 15s timeout.</p><p class="rm-p">- <b>/vote:</b> three MAGI judges give verdicts with reasoning, then a tally.</p><p class="rm-p">- <b>/news:</b> RSS from many outlets, clustered into stories by embeddings, summarized per section and split by outlet lean.</p><p class="rm-p">- <b>Stack:</b> Node/Express, PostgreSQL + pgvector, Docker Compose, Ollama.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/magi_AI" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    magips: `<h1 class="rm-h1"># MagiPs</h1><p class="rm-p">> What's running on my machine, and how do I stop it? The ~30 things that matter instead of 500 processes.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Groups processes into apps, services, dev servers, databases, containers and open ports by parsing /proc.</p><p class="rm-p">- Explains what each thing is, with the right way to stop it built in.</p><p class="rm-p">- Zero dependencies beyond libc, with a unit test suite and JSON output for scripting.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/MagiPs" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    magicc: `<h1 class="rm-h1"># MagiCC</h1><p class="rm-p">> What is Docker keeping on my disk, and what can I delete? An explained alternative to docker system prune.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Rates every image, container, volume, network and cache entry as safe, check or keep, and explains why.</p><p class="rm-p">- Interactive picker with confirmations by risk: deleting a volume with data means typing part of its name.</p><p class="rm-p">- Reports measured disk space freed, not an estimate. No root needed.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/MagiCC" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    waygo: `<h1 class="rm-h1"># WayGo</h1><p class="rm-p">> Master's thesis: intercity bus route and booking platform for Greece.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Selenium scrapers aggregate real-time routes and prices from fragmented operator sites.</p><p class="rm-p">- Spring Boot REST APIs + MySQL, deployed to a VPS with GitHub Actions.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://waygotickets.com" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ LIVE SITE ]</a></p><p class="rm-p">> <a href="https://github.com/vabasda/WayGo" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    dotfiles: `<h1 class="rm-h1"># dotfiles</h1><p class="rm-p">> My Arch Linux desktop: Hyprland, Waybar, Alacritty, Zsh, Neovim.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Tracked with a bare git repo against $HOME, no symlink manager needed.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/dotfiles" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    bash_scripts: `<h1 class="rm-h1"># Bash_Scripts</h1><p class="rm-p">> Scripts for my Arch/Hyprland desktop, symlinked into ~/.local/bin.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- MAGI/NERV terminal dashboard that opens inside the Waybar frame.</p><p class="rm-p">- Rofi power and power-profile menus, pywal/custom theme toggle, keyboard RGB, battery notifier as a systemd user service.</p><p class="rm-p">- Small tools: image recoloring (gowall), OverTheWire SSH helper, Wayland launchers for Compass and wireguird.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/Bash_Scripts" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ EXTRACT SOURCE ]</a></p>`,
-    archive: `<h1 class="rm-h1"># Archive</h1><p class="rm-p">> University projects (M.Eng CS&amp;E, Univ. of Ioannina).</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Multithreaded LSM storage engine (C, pthreads)</p><p class="rm-p">- Compiler for a Python-like language (Python)</p><p class="rm-p">- Social Bookstore (Spring Boot)</p><p class="rm-p">- External sort &amp; R-tree indexing, neural networks from scratch, AI search algorithms, Lucene search engine, data structures, terminal games (Java)</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom" target="_blank" rel="noopener noreferrer" style="color: #0f0;">[ BROWSE PROFILE ]</a></p>`,
+    magi: `<h1 class="rm-h1"># MAGI_AI</h1><p class="rm-p">> Private local assistant on one model (qwen3.5:9b via Ollama), with a CLI and an Electron UI.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- <b>Memory:</b> RAG (pgvector) over past chats, plus saved fact files for global and per-project context.</p><p class="rm-p">- <b>Tools:</b> web search via self-hosted SearXNG, file edits shown as diffs, approved terminal commands, secret files fenced off.</p><p class="rm-p">- <b>Sandbox:</b> code runs under bubblewrap with no network, no $HOME and a 15s timeout.</p><p class="rm-p">- <b>/vote:</b> three MAGI judges give verdicts with reasoning, then a tally.</p><p class="rm-p">- <b>/news:</b> RSS from many outlets, clustered into stories by embeddings, summarized per section and split by outlet lean.</p><p class="rm-p">- <b>Stack:</b> Node/Express, PostgreSQL + pgvector, Docker Compose, Ollama.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/magi_AI" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    magips: `<h1 class="rm-h1"># MagiPs</h1><p class="rm-p">> What's running on my machine, and how do I stop it? The ~30 things that matter instead of 500 processes.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Groups processes into apps, services, dev servers, databases, containers and open ports by parsing /proc.</p><p class="rm-p">- Explains what each thing is, with the right way to stop it built in.</p><p class="rm-p">- Zero dependencies beyond libc, with a unit test suite and JSON output for scripting.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/MagiPs" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    magicc: `<h1 class="rm-h1"># MagiCC</h1><p class="rm-p">> What is Docker keeping on my disk, and what can I delete? An explained alternative to docker system prune.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Rates every image, container, volume, network and cache entry as safe, check or keep, and explains why.</p><p class="rm-p">- Interactive picker with confirmations by risk: deleting a volume with data means typing part of its name.</p><p class="rm-p">- Reports measured disk space freed, not an estimate. No root needed.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/MagiCC" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    waygo: `<h1 class="rm-h1"># WayGo</h1><p class="rm-p">> Master's thesis: intercity bus route and booking platform for Greece.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Selenium scrapers aggregate real-time routes and prices from fragmented operator sites.</p><p class="rm-p">- Spring Boot REST APIs + MySQL, deployed to a VPS with GitHub Actions.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://waygotickets.com" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ LIVE SITE ]</a></p><p class="rm-p">> <a href="https://github.com/vabasda/WayGo" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    dotfiles: `<h1 class="rm-h1"># dotfiles</h1><p class="rm-p">> My Arch Linux desktop: Hyprland, Waybar, Alacritty, Zsh, Neovim.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Tracked with a bare git repo against $HOME, no symlink manager needed.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/dotfiles" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    bash_scripts: `<h1 class="rm-h1"># Bash_Scripts</h1><p class="rm-p">> Scripts for my Arch/Hyprland desktop, symlinked into ~/.local/bin.</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- MAGI/NERV terminal dashboard that opens inside the Waybar frame.</p><p class="rm-p">- Rofi power and power-profile menus, pywal/custom theme toggle, keyboard RGB, battery notifier as a systemd user service.</p><p class="rm-p">- Small tools: image recoloring (gowall), OverTheWire SSH helper, Wayland launchers for Compass and wireguird.</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom/Bash_Scripts" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ EXTRACT SOURCE ]</a></p>`,
+    archive: `<h1 class="rm-h1"># Archive</h1><p class="rm-p">> University projects (M.Eng CS&amp;E, Univ. of Ioannina).</p><h2 class="rm-h2">## Key Features</h2><p class="rm-p">- Multithreaded LSM storage engine (C, pthreads)</p><p class="rm-p">- Compiler for a Python-like language (Python)</p><p class="rm-p">- Social Bookstore (Spring Boot)</p><p class="rm-p">- External sort &amp; R-tree indexing, neural networks from scratch, AI search algorithms, Lucene search engine, data structures, terminal games (Java)</p><h2 class="rm-h2">## Links</h2><p class="rm-p">> <a href="https://github.com/yle-rom" target="_blank" rel="noopener noreferrer" style="color: var(--phosphor);">[ BROWSE PROFILE ]</a></p>`,
   };
 
   // --- PROJECTS: CARTRIDGE CONSOLE LOGIC ---
@@ -435,41 +458,41 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "INITIALIZE",
       points: [
-        "WRITE THE BRIEF BEFORE THE FIRST PROMPT: THE GOAL, WHAT DONE LOOKS LIKE, AND THE HARD RULES.",
-        "RULES LIVE IN A CLAUDE.MD FILE THE AGENT READS EVERY SESSION: HOW TO TALK TO ME, WHAT IT MUST NEVER TOUCH, AND HOW I WANT WORK DELIVERED.",
+        "Write the brief before the first prompt: the goal, what done looks like, and the hard rules.",
+        "Rules live in a CLAUDE.md file the agent reads every session: how to talk to me, what it must never touch, and how I want work delivered.",
       ],
     },
     {
       name: "ROLES",
       points: [
-        "I AM THE ARCHITECT AND ORCHESTRATOR: I OWN THE DESIGN, THE SCOPE AND THE TRADE-OFFS.",
-        "CLAUDE CODE IS THE BUILDER: IT PROPOSES OPTIONS, WRITES THE CODE AND EXPLAINS THE WHY. DESIGN CALLS COME BACK TO ME.",
+        "I am the architect and orchestrator: I own the design, the scope and the trade-offs.",
+        "Claude Code is the builder: it proposes options, writes the code and explains the why. Design calls come back to me.",
       ],
     },
     {
       name: "WORKFLOW",
       points: [
-        "PLAN → APPROVE → BUILD IN SMALL STEPS → RUN IT TO VERIFY → ONE COMMIT PER CHANGE.",
-        "ANALYZE BEFORE BUILDING. ONE STEP AT A TIME.",
-        "A SHORT STATUS LINE TRACKS WHAT IS DONE, WHAT IS IN PROGRESS AND WHAT IS PARKED.",
+        "Plan → approve → build in small steps → run it to verify → one commit per change.",
+        "Analyze before building. One step at a time.",
+        "A short status line tracks what is done, what is in progress and what is parked.",
       ],
     },
     {
       name: "GUARDRAILS",
       points: [
-        "IT ASKS BEFORE EDITING AND SHOWS WHAT A CHANGE AFFECTS FIRST.",
-        "NOTHING IS DONE UNTIL IT IS RUN AND CHECKED: A REAL TEST, A DATABASE QUERY, A RENDERED PAGE.",
-        "CONFIGS ARE BACKED UP BEFORE ANY CHANGE. ONE COMMIT PER CHANGE, SO ANY STEP REVERTS IN ONE COMMAND.",
-        "PRODUCTION IS OFF-LIMITS: IT PREPARES THE FILES AND EXACT COMMANDS, I RUN THEM.",
+        "It asks before editing and shows what a change affects first.",
+        "Nothing is done until it is run and checked: a real test, a database query, a rendered page.",
+        "Configs are backed up before any change. One commit per change, so any step reverts in one command.",
+        "Production is off-limits: it prepares the files and exact commands, I run them.",
       ],
     },
     {
       name: "OPTIMIZE",
       points: [
-        "IT KEEPS MEMORY FILES ON HOW I WORK AND UPDATES THEM AS I USE IT.",
-        "CORRECT IT TWICE AND THE CORRECTION BECOMES A PERMANENT RULE.",
-        "PERIODICALLY ASK FOR FOUND PATTERNS ON MY WORKFLOW AND HOW TO IMPROVE IT",
-        "HANDOFF NOTES LET A NEW SESSION PICK UP WHERE THE LAST ONE STOPPED.",
+        "It keeps memory files on how I work and updates them as I use it.",
+        "Correct it twice and the correction becomes a permanent rule.",
+        "Periodically ask for found patterns on my workflow and how to improve it.",
+        "Handoff notes let a new session pick up where the last one stopped.",
       ],
     },
   ];
