@@ -181,41 +181,76 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- SKILLS FIGHTER ROSTER LOGIC ---
   const fighterData = {
     // BACKEND
+    python: {
+      name: "PYTHON",
+      class: "SCRIPTING / DATA",
+      rank: "S-TIER",
+      exp: "EXPERT",
+      icon: "devicon-python-plain",
+    },
     java: {
       name: "JAVA",
       class: "HEAVY BACKEND",
-      rank: "S-TIER",
-      exp: "EXPERT",
-      icon: "devicon-java-plain",
-    },
-    python: {
-      name: "PYTHON",
-      class: "SCRIPTING / AI",
-      rank: "B-TIER",
-      exp: "PROFICIENT",
-      icon: "devicon-python-plain",
-    },
-    rust: {
-      name: "RUST",
-      class: "SYSTEMS BRAWLER",
-      rank: "C-TIER",
-      exp: "NOVICE",
-      icon: "devicon-rust-plain",
-    },
-    sql: {
-      name: "SQL",
-      class: "DATA JUGGERNAUT",
       rank: "A-TIER",
       exp: "ADVANCED",
+      icon: "devicon-java-plain",
+    },
+    c: {
+      name: "C",
+      class: "LOW-LEVEL DUELIST",
+      rank: "B-TIER",
+      exp: "PROFICIENT",
+      icon: "devicon-c-plain",
+    },
+    spring: {
+      name: "SPRING BOOT",
+      class: "BOOT · SECURITY · DATA",
+      rank: "A-TIER",
+      exp: "ADVANCED",
+      icon: "devicon-spring-plain",
+    },
+    mongo: {
+      name: "MONGODB",
+      class: "DOCUMENT HOARDER",
+      rank: "A-TIER",
+      exp: "ADVANCED",
+      icon: "devicon-mongodb-plain",
+    },
+    postgres: {
+      name: "POSTGRESQL",
+      class: "VECTOR SEEKER (PGVECTOR)",
+      rank: "B-TIER",
+      exp: "PROFICIENT",
+      icon: "devicon-postgresql-plain",
+    },
+    mysql: {
+      name: "MYSQL",
+      class: "RELATIONAL VETERAN",
+      rank: "B-TIER",
+      exp: "PROFICIENT",
       icon: "devicon-mysql-plain",
+    },
+    crawl: {
+      name: "WEB CRAWLING",
+      class: "APIS · BEAUTIFULSOUP · SELENIUM · PLAYWRIGHT",
+      rank: "S-TIER",
+      exp: "EXPERT",
+      icon: "devicon-selenium-plain",
+    },
+    ai: {
+      name: "LOCAL AI",
+      class: "RAG · OLLAMA · PGVECTOR",
+      rank: "B-TIER",
+      exp: "PROFICIENT",
+      icon: "devicon-ollama-plain",
     },
 
     // SYSTEM & DEPLOY
     arch: {
       name: "ARCH LINUX",
       class: "DISTRO GRANDMASTER (BTW)",
-      rank: "S-TIER",
-      exp: "EXPERT",
+      rank: "A-TIER",
+      exp: "ADVANCED",
       icon: "devicon-archlinux-plain",
     },
     docker: {
@@ -258,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
       class: "PROCESS NECROMANCER",
       rank: "A-TIER",
       exp: "ADVANCED",
-      icon: "devicon-nodejs-plain",
+      icon: "devicon-pm2-plain",
     },
     systemd: {
       name: "SYSTEMD",
