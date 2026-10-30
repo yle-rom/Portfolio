@@ -105,11 +105,22 @@ document.addEventListener("DOMContentLoaded", () => {
       flash.classList.add("flash-active");
 
       setTimeout(() => {
+        const insideTv = document.getElementById("inside-tv");
         document.getElementById("room").style.display = "none";
-        document.getElementById("inside-tv").style.display = "flex";
+        insideTv.style.display = "flex";
+        insideTv.classList.add("crt-power-on");
+        insideTv.addEventListener("animationend", function done(e) {
+          if (e.animationName !== "crt-power-on") return;
+          insideTv.classList.remove("crt-power-on");
+          insideTv.removeEventListener("animationend", done);
+        });
         document.getElementById("osd-nav").style.display = "flex";
         syncBlinks();
+        // Drop the black cover instantly so it doesn't dim the power-on line
+        flash.style.transition = "none";
         flash.classList.remove("flash-active");
+        flash.getBoundingClientRect();
+        flash.style.transition = "";
         staticAudio.volume = 0.2;
         staticAudio.play().catch(() => {});
       }, 500);
@@ -143,6 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
     contact: "CH 05",
   };
   let currentChannel = "main-menu";
+  const programsContainer = document.getElementById("programs-container");
+  programsContainer.addEventListener("animationend", (e) => {
+    if (e.animationName === "crt-roll")
+      programsContainer.classList.remove("crt-roll");
+  });
 
   const changeChannel = (channelId) => {
     zapSound.currentTime = 0;
@@ -150,6 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const innerStatic = document.getElementById("inner-static");
     innerStatic.style.opacity = "0.8";
+    // Restart the roll even when zapping faster than it lasts
+    programsContainer.classList.remove("crt-roll");
+    programsContainer.getBoundingClientRect();
+    programsContainer.classList.add("crt-roll");
     setDropdown(false);
     currentChannel = channelId;
 

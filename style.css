@@ -137,7 +137,7 @@ html {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--text);
+  background-color: #000;
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
@@ -159,6 +159,119 @@ html {
   justify-content: center;
   align-items: center;
   background-color: #111;
+  overflow: hidden;
+}
+
+/* CRT glass over the whole screen: curved corners, vignette, faint reflection */
+.crt-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+  border-radius: 4vmin;
+  box-shadow:
+    0 0 0 4vmin #000,
+    inset 0 0 8vmin rgba(0, 0, 0, 0.85);
+  background:
+    radial-gradient(
+      ellipse at 30% 15%,
+      rgba(255, 255, 255, 0.04),
+      transparent 40%
+    ),
+    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.5));
+}
+
+/* Shadow mask: the red/green/blue phosphor stripes of the tube */
+.crt-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06) 0 1px,
+    rgba(0, 255, 0, 0.06) 1px 2px,
+    rgba(0, 0, 255, 0.06) 2px 3px
+  );
+}
+
+/* Slow bright band rolling down, like a beat between camera and refresh rate */
+.crt-glass::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(var(--phosphor-rgb), 0.05),
+    transparent
+  );
+  animation: scan-bar 9s linear infinite;
+}
+
+@keyframes scan-bar {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(400%);
+  }
+}
+
+/* Power-on: a dot widens into a bright line, then the line opens into the picture */
+#inside-tv.crt-power-on {
+  animation: crt-power-on 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes crt-power-on {
+  0% {
+    transform: scale(0.02, 0.003);
+    filter: brightness(6);
+  }
+  35% {
+    transform: scale(1, 0.003);
+    filter: brightness(6);
+  }
+  100% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+}
+
+/* Channel change: the picture loses vertical hold and rolls; the swap happens mid-roll at 300ms */
+#programs-container.crt-roll {
+  animation: crt-roll 0.55s linear;
+}
+
+@keyframes crt-roll {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-4%) skewX(-3deg);
+  }
+  54% {
+    transform: translateY(-85%);
+    filter: brightness(1.6);
+  }
+  55% {
+    transform: translateY(85%);
+    filter: brightness(1.6);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-glass::after {
+    display: none;
+  }
+  #inside-tv.crt-power-on,
+  #programs-container.crt-roll {
+    animation: none;
+  }
 }
 
 #inner-static {
